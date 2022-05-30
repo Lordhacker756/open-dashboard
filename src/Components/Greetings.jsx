@@ -6,12 +6,15 @@ function greet() {
   var time = moment().format("a");
   var h = moment().format("h");
   var greetMsg = "";
+  console.log(h)
   // During mornign time, if it's am
   if (time === "am") {
-    if (time === "am" && h < 7) //Early morning time
-    greetMsg = "Good Morning! Early Bird!";
-    else 
-    greetMsg = "Own the day!";
+    if (h < 2 || h==12) //Early morning time
+    greetMsg = "Good Morning! Hustler";
+    else if (h<6)
+    greetMsg = "Good Morning! Ealry Bird";
+    else
+    greetMsg = "Own The Day!"
   } 
 
   else

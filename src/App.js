@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <>
-    {(!user.verified)?<Hello/>:
+    {(user.verified && user.currLocation && user.name)?<Hello/>:
       <div className="main__container h-screen px-5 py-2 bg-[url('https://source.unsplash.com/random/1366x768/?night')] bg-cover">
         <div className="upper_container h-[10%] flex justify-between items-center">
           <div className="left text-white">
@@ -28,7 +28,7 @@ const App = () => {
           </div>
         </div>
         <div className="middle_container  h-[80%] flex flex-col justify-center items-center">
-          <div className="time_conatiner">
+          <div className="time_conatiner bg-black bg-opacity-30 rounded-3xl px-7">
             <Time />
           </div>
           <div className="greetings">
@@ -40,12 +40,12 @@ const App = () => {
           <div className="mini_todo_container">
             <ToDoMini />
           </div>
-          <div className="main_tasks">
+          <div className="main_tasks ">
             <Quote />
           </div>
         </div>
         <div className="lower_container  h-[10%] flex justify-end items-center">
-          <div className="todo text-white">TOdo</div>
+          <div className="todo text-white">To Do</div>
         </div>
       </div>}
       </>

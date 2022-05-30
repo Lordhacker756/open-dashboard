@@ -7,6 +7,7 @@ const Hello = () => {
   const [name, setName] = useState();
   const [location, setLocation] = useState();
   const [loading, setLoading] = useState();
+  
 
   return (
     <div className="snap-y h-screen overflow-y-hidden">
@@ -58,9 +59,9 @@ const Hello = () => {
               setLoading(true);
               setTimeout(() => {
                   localStorage.setItem('name',name)
-                  localStorage.setItem('location',location)
+                  localStorage.setItem('currLocation',location)
                   localStorage.setItem('verified',true)
-                setUser({ name, location, verified: true });
+                setUser({ name, currLocation:location, verified: true });
               }, 1500);
             }
           }}
