@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import moment from "moment";
+import UserContext, { User } from "../Contexts/UserContext";
 
 function greet() {
   var time = moment().format("a");
@@ -32,10 +33,12 @@ function greet() {
   return greetMsg;
 }
 
-const Greetings = (props) => {
+const Greetings = () => {
+  const {user, setUser} = useContext(User)
+  console.log(user.name)
   return (
     <div>
-      <h1 className="text-white font-thin text-5xl">{greet()}</h1>
+      <h1 className="text-white font-thin text-5xl">{`${greet()}, ${user.name}`}</h1>
     </div>
   );
 };
