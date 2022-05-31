@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { TiWeatherSunny } from "react-icons/ti";
-import { AiOutlineSearch } from "react-icons/ai";
-import axios from "axios";
-import User from '../Contexts/UserContext'
+
 
 const Weather = () => {
   const [weather, setWeather] = useState()
@@ -14,14 +12,15 @@ const getWeather = async() =>{
     const response = await fetch(baseURL)
     const data = await response.json();
     setWeather(data)
-    console.log(data)
+    // setInterval(()=>{
+    //   weatherMsg(data);
+    // },5000)
     };
 
   const baseURL = `https://api.weatherapi.com/v1/forecast.json?key=f3d41b9faf0b4d679ad132824223005&q=${currLocation}&days=1&aqi=no&alerts=no`;
 
   useEffect(() => {
     getWeather()
-    weatherMsg()
 }, []);
 
 function toggleDetails(){
@@ -35,23 +34,27 @@ else
 }
 }
 
-function weatherMsg()
-{
-  {setInterval(()=>{
-    if(shorts == currLocation)
-    {
-      setShorts(weather.current.condition.text)
-    }
-    else if(shorts == weather.current.condition.text)
-    {
-      setShorts(weather.current.temp_c)
-    }
-    else
-    {
-      setShorts(currLocation)
-    }
-  },10000)}
-}
+// function weatherMsg(data)
+// {
+//   var loc = currLocation
+//   var weatherCondition = data.current.condition.text
+//   var temp = data.current.temp_c
+
+//   console.log(shorts)
+
+//   if(shorts == loc)
+//     {
+//       setShorts(weatherCondition)
+//     }
+//   else if(shorts == weatherCondition)
+//     {
+//       setShorts(temp)
+//     }
+//   else
+//     {
+//       setShorts(currLocation)
+//     }
+// }
 
   return (
     <div className="text-white main_container relative">

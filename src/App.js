@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <>
-    {(user.verified && user.currLocation && user.name)?<Hello/>:
+    {!(user.verified)?<Hello/>:
       <div className="main__container h-screen px-5 py-2 bg-[url('https://source.unsplash.com/random/1366x768/?night')] bg-cover">
         <div className="upper_container h-[10%] flex justify-between items-center">
           <div className="left text-white">
