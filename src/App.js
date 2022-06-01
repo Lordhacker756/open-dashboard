@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Greetings from "./Components/Greetings";
 import Quote from "./Components/Quote";
 import Time from "./Components/Time";
@@ -7,11 +7,13 @@ import Weather from "./Components/Weather";
 import { FiMenu } from "react-icons/fi";
 import { User } from "./Contexts/UserContext";
 import Hello from "./Components/Hello";
+import Todos from "./Components/Todos";
 
 
 const App = () => {
 
   const {user,setUser} = useContext(User)
+  const [todo, setTodo] = useState(false)
 
   return (
     <>
@@ -19,9 +21,16 @@ const App = () => {
       <div className="main__container h-screen px-5 py-2 bg-[url('https://source.unsplash.com/random/1366x768/?night')] bg-cover">
         <div className="upper_container h-[10%] flex justify-between items-center">
           <div className="left text-white">
-            <button>
+            <button className="w-[25vw]" onClick={()=>{
+              if(todo){
+                setTodo(false)
+              }
+              else
+              setTodo(true)
+            }}>
               <FiMenu />
             </button>
+            {(todo)&&<Todos/>}
           </div>
           <div className="right">
             <Weather />
@@ -45,7 +54,14 @@ const App = () => {
           </div>
         </div>
         <div className="lower_container  h-[10%] flex justify-end items-center">
-          <div className="todo text-white">To Do</div>
+          <div className="todo text-white">
+          <button onClick={()=>{
+              if(todo){
+                setTodo(false)
+              }
+              else
+              setTodo(true)
+            }}>To Do</button></div>
         </div>
       </div>}
       </>
