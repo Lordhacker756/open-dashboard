@@ -13,7 +13,7 @@ const Todos = () => {
   }
 
   return (
-    <div className="absolute bg-white w-[25vw] h-96 bg-opacity-40 rounded-xl p-2 overflow-y-scroll todo_container">
+    <div className="absolute bg-white w-[25vw] h-96 bg-opacity-40 rounded-xl p-2 overflow-y-scroll todo_container shadow-xl">
       {notes &&
         notes.map((elem, key) => {
           return (

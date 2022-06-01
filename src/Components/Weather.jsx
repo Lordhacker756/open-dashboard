@@ -1,12 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { TiWeatherSunny } from "react-icons/ti";
+import { User } from "../Contexts/UserContext";
 
 
 const Weather = () => {
   const [weather, setWeather] = useState()
   const [details, setDetails] = useState(false)
-  const currLocation = localStorage.getItem('currLocation')
+  var currLocation = localStorage.getItem('currLocation')
   const [shorts, setShorts] = useState(currLocation)
+
+const {user} = useContext(User);
 
 const getWeather = async() =>{
     const response = await fetch(baseURL)
@@ -23,6 +26,14 @@ const getWeather = async() =>{
     getWeather()
 }, []);
 
+//Fire a useEffect with the updated data as soon as the location is changed in the local storage
+useEffect(() => {
+  currLocation = localStorage.getItem('currLocation')
+  getWeather()
+  setShorts(currLocation)
+}, [user])
+
+
 function toggleDetails(){
 if(details)
 {
@@ -33,28 +44,6 @@ else
   setDetails(true)
 }
 }
-
-// function weatherMsg(data)
-// {
-//   var loc = currLocation
-//   var weatherCondition = data.current.condition.text
-//   var temp = data.current.temp_c
-
-//   console.log(shorts)
-
-//   if(shorts == loc)
-//     {
-//       setShorts(weatherCondition)
-//     }
-//   else if(shorts == weatherCondition)
-//     {
-//       setShorts(temp)
-//     }
-//   else
-//     {
-//       setShorts(currLocation)
-//     }
-// }
 
   return (
     <div className="text-white main_container relative">

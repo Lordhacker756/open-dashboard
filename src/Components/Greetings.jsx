@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import moment from "moment";
-import UserContext, { User } from "../Contexts/UserContext";
+import { User } from "../Contexts/UserContext";
 
 function greet() {
   var time = moment().format("a");
   var h = moment().format("h");
   var greetMsg = "";
-  console.log(h)
   // During mornign time, if it's am
   if (time === "am") {
+    console.log(h, time)
     if (h < 2 || h==12) //Early morning time
     greetMsg = "Good Morning! Hustler💪🏻";
     else if (h<6)
@@ -19,7 +19,7 @@ function greet() {
 
   else if(time === "pm")
   {
-    if(h==12 || h<4)
+    if(h===12 || h<4)
     {
       greetMsg="Good Afternoon🌞"
     }
@@ -41,8 +41,7 @@ function greet() {
 }
 
 const Greetings = () => {
-  const {user, setUser} = useContext(User)
-  console.log(user.name)
+  const {user} = useContext(User)
   return (
     <div>
       <h1 className="text-white font-thin text-5xl">{`${greet()}${user.name}`}</h1>

@@ -8,63 +8,103 @@ import { FiMenu } from "react-icons/fi";
 import { User } from "./Contexts/UserContext";
 import Hello from "./Components/Hello";
 import Todos from "./Components/Todos";
-
+import { FiSettings } from "react-icons/fi";
+import Settings from "./Components/Settings";
+import { FaPaintBrush } from "react-icons/fa";
+import Personalize from "./Components/Personalize";
 
 const App = () => {
-
-  const {user,setUser} = useContext(User)
-  const [todo, setTodo] = useState(false)
+  const { user, setUser, theme } = useContext(User);
+  const [todo, setTodo] = useState(false);
+  const [settings, setSettings] = useState(false);
+  const [personalize, setPersonalize] = useState(false);
+  const bg_image = theme.toString();
 
   return (
     <>
-    {!(user.verified)?<Hello/>:
-      <div className="main__container h-screen px-5 py-2 bg-[url('https://source.unsplash.com/random/1366x768/?night')] bg-cover">
-        <div className="upper_container h-[10%] flex justify-between items-center">
-          <div className="left text-white">
-            <button className="w-[25vw]" onClick={()=>{
-              if(todo){
-                setTodo(false)
-              }
-              else
-              setTodo(true)
-            }}>
-              <FiMenu />
-            </button>
-            {(todo)&&<Todos/>}
+      {!user.verified ? (
+        <Hello />
+      ) : (
+        <div
+          className="main__container h-screen px-5 py-2] bg-opacity-75 bg-cover bg-black"
+          style={{
+            background: `url('https://source.unsplash.com/random/1366x768/?${bg_image}')`,
+          }}
+        >
+          <div className="upper_container h-[10%] flex justify-between items-center">
+            <div className="left text-white">
+              <button
+                className="w-[25vw]"
+                onClick={() => {
+                  if (todo) {
+                    setTodo(false);
+                  } else setTodo(true);
+                }}
+              >
+                <FiMenu />
+              </button>
+              {todo && <Todos />}
+            </div>
+            <div className="right">
+              <Weather />
+            </div>
           </div>
-          <div className="right">
-            <Weather />
+          <div className="middle_container  h-[80%] flex flex-col justify-center items-center">
+          <div className="greetings mb-5">
+              <Greetings />
+            </div>
+            <div className="time_conatiner bg-black bg-opacity-30 rounded-3xl px-7">
+              <Time />
+            </div>
+            <div className="todo_main_container bg-black py-1 pb-3 rounded-lg px-3 bg-opacity-40 mt-4">
+              <div className="main_tasks text-white text-xl mt-3">
+                What are the task for the day
+              </div>
+              <div className="mini_todo_container">
+                <ToDoMini />
+              </div>
+            </div>
+            <div className="main_tasks ">
+              <Quote />
+            </div>
+          </div>
+          <div className="lower_container  h-[10%] flex justify-between items-center">
+            <div className="setting_div w-[28%] flex flex-col-reverse relative">
+              <FiSettings
+                style={{ color: "white" }}
+                onClick={() => {
+                  if (settings) {
+                    setSettings(false);
+                  } else {
+                    setSettings(true);
+                  }
+                }}
+              />
+              {settings && <Settings />}
+            </div>
+            <div className="personalize text-white w-[28vw] flex justify-end relative">
+              <button
+                className="flex items-center border-2 border-white rounded-full px-3 py-1 bg-black bg-opacity-40"
+                onClick={() => {
+                  if (personalize) {
+                    setPersonalize(false);
+                  } else setPersonalize(true);
+                }}
+              >
+                Personalize
+                <FaPaintBrush className="mx-2" />
+              </button>
+              {personalize && (
+                <Personalize
+                  setPersonalize={setPersonalize}
+                  personalize={personalize}
+                />
+              )}
+            </div>
           </div>
         </div>
-        <div className="middle_container  h-[80%] flex flex-col justify-center items-center">
-          <div className="time_conatiner bg-black bg-opacity-30 rounded-3xl px-7">
-            <Time />
-          </div>
-          <div className="greetings">
-            <Greetings />
-          </div>
-          <div className="main_tasks text-white text-xl mt-3">
-            What are the task for the day
-          </div>
-          <div className="mini_todo_container">
-            <ToDoMini />
-          </div>
-          <div className="main_tasks ">
-            <Quote />
-          </div>
-        </div>
-        <div className="lower_container  h-[10%] flex justify-end items-center">
-          <div className="todo text-white">
-          <button onClick={()=>{
-              if(todo){
-                setTodo(false)
-              }
-              else
-              setTodo(true)
-            }}>To Do</button></div>
-        </div>
-      </div>}
-      </>
+      )}
+    </>
   );
 };
 
