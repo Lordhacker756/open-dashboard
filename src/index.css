@@ -4,3 +4,16 @@
 * {
     box-sizing: border-box;
 }
+
+.todo_container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.todo_container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.todo_container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+}

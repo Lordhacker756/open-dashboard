@@ -6,30 +6,34 @@ function greet() {
   var time = moment().format("a");
   var h = moment().format("h");
   var greetMsg = "";
-  console.log(time)
+  console.log(h)
   // During mornign time, if it's am
   if (time === "am") {
     if (h < 2 || h==12) //Early morning time
-    greetMsg = "Good Morning! Hustler";
+    greetMsg = "Good Morning! Hustler💪🏻";
     else if (h<6)
-    greetMsg = "Good Morning! Ealry Bird";
+    greetMsg = "Good Morning! Ealry Bird😇";
     else
-    greetMsg = "Own The Day!"
+    greetMsg = "Own The Day😎"
   } 
 
   else if(time === "pm")
   {
     if(h==12 || h<4)
     {
-      greetMsg="Good Afternoon!"
+      greetMsg="Good Afternoon🌞"
     }
-    else if(h<7)
+    else if(h<=7)
     {
-      greetMsg="Good Evening!"
+      greetMsg="Good Evening🌆"
+    }
+    else if(h > 7 && h<10)
+    {
+      greetMsg="Good Night🌃"
     }
     else
     {
-      greetMsg="Good Night"
+      greetMsg="Great Going 🦉"
     }
   }
 
@@ -41,7 +45,7 @@ const Greetings = () => {
   console.log(user.name)
   return (
     <div>
-      <h1 className="text-white font-thin text-5xl">{`${greet()}, ${user.name}`}</h1>
+      <h1 className="text-white font-thin text-5xl">{`${greet()}${user.name}`}</h1>
     </div>
   );
 };

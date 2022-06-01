@@ -19,6 +19,7 @@ const ToDoMini = () => {
           type="submit"
           onClick={(e) => {
             e.preventDefault();
+            setTask("")
             setNotes([...notes,task]);
           }}
         >

@@ -13,11 +13,11 @@ const Todos = () => {
   }
 
   return (
-    <div className="absolute bg-white w-[25vw] h-96 bg-opacity-40 rounded-xl p-2">
+    <div className="absolute bg-white w-[25vw] h-96 bg-opacity-40 rounded-xl p-2 overflow-y-scroll todo_container">
       {notes &&
         notes.map((elem, key) => {
           return (
-            <div className="todo flex items-start bg-black bg-opacity-20 justify-between p-4 rounded-2xl" key={key}>
+            <div className="todo flex items-start my-2 bg-black bg-opacity-20 justify-between p-4 rounded-2xl" key={key}>
               <p className="w-[20vw] h-auto pr-4 flex flex-wrap">
                 {elem}
               </p>
