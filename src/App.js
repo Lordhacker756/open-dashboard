@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Greetings from "./Components/Greetings";
 import Quote from "./Components/Quote";
 import Time from "./Components/Time";
@@ -18,11 +18,26 @@ const App = () => {
   const [todo, setTodo] = useState(false);
   const [settings, setSettings] = useState(false);
   const [personalize, setPersonalize] = useState(false);
-  const bg_image = theme.toString();
+
+  var bg_image=JSON.parse(localStorage.getItem('theme')).toString(); 
+
+  // function initBg(){
+  //   bg_image = JSON.parse(localStorage.getItem('theme')).toString();
+  //   console.log(`background image is ${bg_image}`)
+  //   if(!bg_image)
+  //   {
+  //     bg_image = "nature"
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   initBg()
+  //   }, [])
 
   return (
     <>
-      {!user.verified ? (
+    {console.log((user.location && user.name && user.verified &&user.theme)===null)}
+      {((user.location && user.name && user.verified &&user.theme)===null) ? (
         <Hello />
       ) : (
         <div

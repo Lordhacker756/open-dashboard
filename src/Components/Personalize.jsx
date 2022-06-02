@@ -4,7 +4,7 @@ import { User } from "../Contexts/UserContext";
 const Personalize = ({personalize, setPersonalize}) => {
   const [category, setCategory] = useState("");
   const [themeChoice, setThemeChoice] = useState([]);
-    const {theme,setTheme} = useContext(User)
+  const {user,setUser} = useContext(User)
 
   return (
     <div className="absolute bottom-10 bg-black h-[40vh] w-full bg-opacity-40 rounded-lg p-4 shadow-lg">
@@ -49,8 +49,10 @@ const Personalize = ({personalize, setPersonalize}) => {
          })}
           </div>
           <button disabled={themeChoice.length===0} className="absolute bottom-3 font-light border-2 border-white rounded-full px-5 hover:bg-green-500 disabled:bg-red-600" onClick={()=>{
-              setTheme(themeChoice)
+              setUser({...user,theme:themeChoice})
+              localStorage.setItem('theme',JSON.stringify(user.theme))
               setPersonalize(false)
+              window.location.reload()
           }}>
               Save
           </button>

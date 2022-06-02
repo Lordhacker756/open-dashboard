@@ -7,7 +7,8 @@ const Hello = () => {
   const [name, setName] = useState();
   const [location, setLocation] = useState();
   const [loading, setLoading] = useState();
-  
+  const [category, setCategory] = useState("");
+  const [themeChoice, setThemeChoice] = useState([]);
 
   return (
     <div className="snap-y h-screen overflow-y-hidden">
@@ -51,6 +52,54 @@ const Hello = () => {
           }}
           autoComplete="off"
         />
+        <div className="category_div w-80">
+          <p className="text-white font-light text-xs my-1">
+            Enter max 3 categories for your wallpapers one at a time
+          </p>
+          <input
+            className="w-72 bg-transparent border-b-2 border-white mt-1 px-1 placeholder:text-white text-white focus:outline-none"
+            type="text"
+            name="location"
+            id="location"
+            placeholder="Enter category e.g 'nature' "
+            autoComplete="off"
+            value={category}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
+          />
+          <button
+            className="border-2 border-[#00D26A] rounded-full  bg-[#00D26A]"
+            disabled={themeChoice.length > 2 || !category}
+            onClick={() => {
+              setThemeChoice([...themeChoice, category]);
+              setCategory("");
+            }}
+          >
+            ✅
+          </button>
+        </div>
+        <div className="choices flex mt-3">
+          {themeChoice.map((elem, key) => {
+            return (
+              <div
+                className="flex border-[2px] mx-1 border-white rounded-full w-fit px-3 items-center"
+                key={key}
+              >
+                <p className="mr-2 text-white">{elem}</p>
+                <button
+                  className="hover:text-red-500"
+                  onClick={() => {
+                    setThemeChoice(themeChoice.filter((elem, k) => k != key));
+                  }}
+                >
+                  x
+                </button>
+              </div>
+            );
+          })}
+        </div>
+
         <button
           className="mt-4 px-5 py-1 border-2 border-white rounded-full text-white"
           onClick={() => {
@@ -58,10 +107,11 @@ const Hello = () => {
               console.log(name, location);
               setLoading(true);
               setTimeout(() => {
-                  localStorage.setItem('name',name)
-                  localStorage.setItem('currLocation',location)
-                  localStorage.setItem('verified',true)
-                setUser({ name, currLocation:location, verified: true });
+                localStorage.setItem("name", name);
+                localStorage.setItem("currLocation", location);
+                localStorage.setItem("verified", true);
+                localStorage.setItem("theme",JSON.stringify(themeChoice))
+                setUser({ name, currLocation: location, verified: true,theme:themeChoice });
               }, 1500);
             }
           }}
