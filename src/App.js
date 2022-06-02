@@ -19,25 +19,30 @@ const App = () => {
   const [settings, setSettings] = useState(false);
   const [personalize, setPersonalize] = useState(false);
 
-  var bg_image=JSON.parse(localStorage.getItem('theme')).toString(); 
+  var bg_image=JSON.parse(localStorage.getItem('theme')).toString() ?? ["nature","night"]; 
 
-  // function initBg(){
-  //   bg_image = JSON.parse(localStorage.getItem('theme')).toString();
-  //   console.log(`background image is ${bg_image}`)
-  //   if(!bg_image)
-  //   {
-  //     bg_image = "nature"
-  //   }
-  // }
+  function initBg(){
+    bg_image = JSON.parse(localStorage.getItem('theme')).toString();
+    // console.log(`background image is ${bg_image}`)
+    if(!bg_image)
+    {
+      bg_image = "nature"
+    }
+  }
 
-  // useEffect(() => {
-  //   initBg()
-  //   }, [])
+  var loc,tname,verified,ttheme;
+  useEffect(() => {
+    loc = localStorage.getItem('currLocation')
+    tname = localStorage.getItem('name')
+    verified = localStorage.getItem('verified')
+    ttheme = localStorage.getItem('theme')
+    initBg()
+    }, [])
 
   return (
     <>
-    {console.log((user.location && user.name && user.verified &&user.theme)===null)}
-      {((user.location && user.name && user.verified &&user.theme)===null) ? (
+    {console.log((user.currLocation)=="\"NA\"")}
+      {((user.currLocation==="\"NA\"") && (user.name==="\"NA\"") && (user.verified==="\"NA\"")) ? (
         <Hello />
       ) : (
         <div
