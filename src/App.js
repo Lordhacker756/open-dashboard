@@ -41,7 +41,7 @@ const App = () => {
 
   return (
     <>
-    {console.log((user.currLocation)=="\"NA\"")}
+    {console.log(((user.currLocation==="\"NA\"") && (user.name==="\"NA\"") && (user.verified==="\"NA\"")))}
       {((user.currLocation==="\"NA\"") && (user.name==="\"NA\"") && (user.verified==="\"NA\"")) ? (
         <Hello />
       ) : (

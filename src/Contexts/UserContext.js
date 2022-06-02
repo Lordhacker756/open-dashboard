@@ -46,7 +46,7 @@ const UserContext = ({ children }) => {
 
     useEffect(() => {
         initNotes();
-        // initUser();
+        initUser();
     }, [])
 
 
