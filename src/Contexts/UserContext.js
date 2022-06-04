@@ -19,32 +19,13 @@ const UserContext = ({ children }) => {
     }
 
     //Function to initialize the user if localstoage is empty
-    function initUser(){
-        if(!localStorage.getItem('name'))
-        {
-            console.log("default initialization ran")
-            localStorage.setItem('name',JSON.stringify("NA"))
-            localStorage.setItem('currLocation',JSON.stringify("NA"))
-            localStorage.setItem('verified',JSON.stringify("NA"))
-            localStorage.setItem('theme',JSON.stringify("NA"))
-    
-            return({
-                name:"NA",
-                currLocation:"NA",
-                verified:"NA",
-                theme:[]
-            })
-        }
-        else
-        {
-            console.log("Normal initialization")
-            return({
-                name:(localStorage.getItem('name')),
-                currLocation:(localStorage.getItem('currLocation')),
-                verified:(localStorage.getItem('verified')),
-                theme:JSON.parse(localStorage.getItem('theme'))
-            })
-        }
+    function initUser() {
+        return({
+            name:(localStorage.getItem('name')),
+            currLocation:(localStorage.getItem('currLocation')),
+            verified:(localStorage.getItem('verified')),
+            theme:JSON.parse(localStorage.getItem('theme'))
+        })
     }
 
     // Run the initializing function on first load

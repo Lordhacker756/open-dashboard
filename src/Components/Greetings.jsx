@@ -10,7 +10,7 @@ function greet() {
 
   // During mornign time, if it's am
   if (time === "am") {
-    if (h < 2 || h == 12) //Early morning time (12AM-2AM)
+    if (h < 2 || h === 12) //Early morning time (12AM-2AM)
     greetMsg = "Good Morning! Hustler💪🏻";
     else if (h<6) // 3AM - 5AM
     greetMsg = "Good Morning! Ealry Bird😇";
