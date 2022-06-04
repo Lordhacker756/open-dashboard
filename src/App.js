@@ -12,14 +12,27 @@ import { FiSettings } from "react-icons/fi";
 import Settings from "./Components/Settings";
 import { FaPaintBrush } from "react-icons/fa";
 import Personalize from "./Components/Personalize";
+import fallBackImage from './data/fallback_bg.jpg'
 
 const App = () => {
-  const { user} = useContext(User); //importing the user context which holds the values => name, verified status, theme and current location
+  const {user} = useContext(User); //importing the user context which holds the values => name, verified status, theme and current location
   const [todo, setTodo] = useState(false); //Stores the notes
   const [settings, setSettings] = useState(false); // stores toggle state of settings box
   const [personalize, setPersonalize] = useState(false); //stores toggle state of personalize box
+  const [bg, setBg] = useState(fallBackImage)
 
   var bg_image
+
+  const getBg = async() =>{
+    try {
+      const res = await fetch(`https://source.unsplash.com/random/1366x768/?${bg_image}`)
+       if(res.url){
+         setBg(res.url)
+       } 
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   function initBg(){ //Function to fetch the theme from the localstorage, if found, assign it to bg_image, else assign "nature"
     bg_image = JSON.parse(localStorage.getItem('theme')).toString(); 
@@ -32,6 +45,7 @@ const App = () => {
   //Calling the function to fetch the theme after the loading of the page is completed
   useEffect(() => {
     initBg()
+    getBg();
     }, [])
 
   return (
@@ -44,7 +58,7 @@ const App = () => {
         <div 
           className="main__container h-screen px-5 py-2] bg-opacity-75 bg-cover bg-black"
           style={{
-            background: `url('https://source.unsplash.com/random/1366x768/?${bg_image}')`, //Image is fetched as per the user's preference
+            background: `url(${bg})`, backgroundSize:'cover' //Image is fetched as per the user's preference
           }}
         >
           <div className="upper_container h-[10%] flex justify-between items-center"> 
