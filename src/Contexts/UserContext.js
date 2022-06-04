@@ -3,7 +3,9 @@ import { createContext, useEffect, useState } from "react";
 export const User = createContext();
 
 const UserContext = ({ children }) => {
-    const [notes, setNotes] = useState(initNotes())
+    //Note state for storing the todos
+    const [notes, setNotes] = useState(initNotes()) 
+    //User state to store name, current location, verified status and theme
     const [user, setUser] = useState(initUser())
 
     //To pull tshe notes from localstorage on first loading
@@ -16,6 +18,7 @@ const UserContext = ({ children }) => {
             return []
     }
 
+    //Function to initialize the user if localstoage is empty
     function initUser(){
         if(!localStorage.getItem('name'))
         {
@@ -44,6 +47,7 @@ const UserContext = ({ children }) => {
         }
     }
 
+    // Run the initializing function on first load
     useEffect(() => {
         initNotes();
         initUser();
@@ -57,6 +61,7 @@ const UserContext = ({ children }) => {
 
    // update localstorage when wallpaper categories are modified
      useEffect(()=>{
+         console.log("Context effect fired");
          localStorage.setItem('theme',JSON.stringify(user.theme))
      },[user.theme])
 

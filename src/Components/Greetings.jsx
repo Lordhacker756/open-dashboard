@@ -3,36 +3,37 @@ import moment from "moment";
 import { User } from "../Contexts/UserContext";
 
 function greet() {
-  var time = moment().format("a");
-  var h = moment().format("h");
+  // Component to greet the user appropriately
+  var time = moment().format("a"); //Gives am or pm
+  var h = moment().format("h"); //gives the hours
   var greetMsg = "";
+
   // During mornign time, if it's am
   if (time === "am") {
-    console.log(h, time)
-    if (h < 2 || h==12) //Early morning time
+    if (h < 2 || h == 12) //Early morning time (12AM-2AM)
     greetMsg = "Good Morning! Hustler💪🏻";
-    else if (h<6)
+    else if (h<6) // 3AM - 5AM
     greetMsg = "Good Morning! Ealry Bird😇";
-    else
+    else // 6AM-12PM
     greetMsg = "Own The Day😎"
   } 
 
   else if(time === "pm")
   {
-    if(h===12 || h<4)
+    if(h===12 || h<4) //12PM-3PM
     {
       greetMsg="Good Afternoon🌞"
     }
-    else if(h<=7)
+    else if(h<=7) // 4PM-7PM
     {
       greetMsg="Good Evening🌆"
     }
-    else if(h > 7 && h<10)
+    else if(h > 7 && h<=10) // 8PM-10PM
     {
       greetMsg="Good Night🌃"
     }
     else
-    {
+    { //10PM - 12AM
       greetMsg="Great Going 🦉"
     }
   }
@@ -44,6 +45,7 @@ const Greetings = () => {
   const {user} = useContext(User)
   return (
     <div>
+    {/* Render the greeting as per the requirement */}
       <h1 className="text-white font-thin text-5xl">{`${greet()}${user.name}`}</h1>
     </div>
   );
