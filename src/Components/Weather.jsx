@@ -46,7 +46,7 @@ else
   return (
     <div className="text-white main_container relative">
       {/* For people who havent configured weather we have this button */}
-      <div className="unconfigured">
+      <div className="weather_div">
         <button className="border-2 bg-black bg-opacity-40 border-white rounded-full w-40 py-1 flex items-center justify-evenly" onClick={toggleDetails}>
           {shorts}
           <TiWeatherSunny />
