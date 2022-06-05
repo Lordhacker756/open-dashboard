@@ -4,9 +4,9 @@ import { CgSpinner } from "react-icons/cg";
 
 const Hello = () => {
   const { user, setUser } = useContext(User);
-  const [name, setName] = useState();
-  const [location, setLocation] = useState();
-  const [loading, setLoading] = useState();
+  const [name, setName] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState("");
   const [themeChoice, setThemeChoice] = useState([]);
 
@@ -110,8 +110,13 @@ const Hello = () => {
                 localStorage.setItem("name", name);
                 localStorage.setItem("currLocation", location);
                 localStorage.setItem("verified", true);
-                localStorage.setItem("theme",JSON.stringify(themeChoice))
-                setUser({ name, currLocation: location, verified: true,theme:themeChoice });
+                localStorage.setItem("theme", JSON.stringify(themeChoice));
+                setUser({
+                  name,
+                  currLocation: location,
+                  verified: true,
+                  theme: themeChoice,
+                });
               }, 1500);
             }
           }}

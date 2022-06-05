@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { User } from "../Contexts/UserContext";
 
-const Personalize = ({personalize, setPersonalize}) => {
+const Personalize = ({ personalize, setPersonalize }) => {
+  const { user, setUser } = useContext(User);
   const [category, setCategory] = useState(""); //Store individual category
-  const [themeChoice, setThemeChoice] = useState([]); // category array
-  const {user,setUser} = useContext(User)
+  const [themeChoice, setThemeChoice] = useState([...user.theme]); // category array
 
   return (
     <div className="absolute bottom-10 bg-black h-[40vh] w-full bg-opacity-40 rounded-lg p-4 shadow-lg">
@@ -13,7 +13,12 @@ const Personalize = ({personalize, setPersonalize}) => {
           Personalize Wallpapers🖼️
         </p>
 
-        <button className="absolute top-3 right-3 text-xl hover:text-red-500" onClick={()=>setPersonalize(false)}>x</button>
+        <button
+          className="absolute top-3 right-3 text-xl hover:text-red-500"
+          onClick={() => setPersonalize(false)}
+        >
+          x
+        </button>
 
         <div className="name_settings">
           <p className="text-white mt-3 font-light text-xs my-1">
@@ -34,32 +39,51 @@ const Personalize = ({personalize, setPersonalize}) => {
           />
           <button
             className="border-2 border-white border-l-0 bg-[#00D26A]"
-            disabled={themeChoice.length>2 || (!category)}
-            onClick={() => {setThemeChoice([...themeChoice,category]
-            )
-            // onclick, clear the input and add the category to theme choice array
-            setCategory("")
+            disabled={themeChoice.length > 2 || !category}
+            onClick={() => {
+              setThemeChoice([...themeChoice, category]);
+              // onclick, clear the input and add the category to theme choice array
+              // Also add theme to local storage
+              // localStorage.setItem("theme", JSON.stringify(themeChoice));
+              setCategory("");
             }}
           >
             ✅
           </button>
           {/* Render the user categories of user input as pills with x button */}
           <div className="choices flex mt-3">
-          {themeChoice.map((elem,key)=>{
-             return <div className="flex border-[2px] mx-1 border-white rounded-full w-fit px-3 items-center" key={key}><p className="mr-2">{elem}</p><button className="hover:text-red-500" onClick={()=>{
-                 setThemeChoice(themeChoice.filter((elem,k)=>k!=key))
-             }}>x</button></div>
-         })}
+            {themeChoice.map((elem, key) => {
+              return (
+                <div
+                  className="flex border-[2px] mx-1 border-white rounded-full w-fit px-3 items-center"
+                  key={key}
+                >
+                  <p className="mr-2">{elem}</p>
+                  <button
+                    className="hover:text-red-500"
+                    onClick={() => {
+                      setThemeChoice(themeChoice.filter((elem, k) => k != key));
+                    }}
+                  >
+                    x
+                  </button>
+                </div>
+              );
+            })}
           </div>
           {/* Button, disabled when user choice is null or more than 3 else updates the theme in the user context object */}
-          <button disabled={themeChoice.length===0} className="absolute bottom-3 font-light border-2 border-white rounded-full px-5 hover:bg-green-500 disabled:bg-red-600" onClick={()=>{
-              setUser({...user,theme:themeChoice})
-              console.log("Personalize use effect fired")
-              localStorage.setItem('theme',JSON.stringify(user.theme))
-              setPersonalize(false)
-              window.location.reload()
-          }}>
-              Save
+          <button
+            disabled={themeChoice.length === 0}
+            className="absolute bottom-3 font-light border-2 border-white rounded-full px-5 hover:bg-green-500 disabled:bg-red-600"
+            onClick={() => {
+              setUser({ ...user, theme: themeChoice });
+              console.log("Personalize use effect fired");
+              localStorage.setItem("theme", JSON.stringify(themeChoice));
+              setPersonalize(false);
+              window.location.reload();
+            }}
+          >
+            Save
           </button>
         </div>
       </div>
