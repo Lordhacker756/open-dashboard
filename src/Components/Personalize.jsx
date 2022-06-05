@@ -43,8 +43,6 @@ const Personalize = ({ personalize, setPersonalize }) => {
             onClick={() => {
               setThemeChoice([...themeChoice, category]);
               // onclick, clear the input and add the category to theme choice array
-              // Also add theme to local storage
-              // localStorage.setItem("theme", JSON.stringify(themeChoice));
               setCategory("");
             }}
           >

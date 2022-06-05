@@ -4,8 +4,8 @@ import { CgSpinner } from "react-icons/cg";
 
 const Hello = () => {
   const { user, setUser } = useContext(User);
-  const [name, setName] = useState(null);
-  const [location, setLocation] = useState(null);
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState("");
   const [themeChoice, setThemeChoice] = useState([]);

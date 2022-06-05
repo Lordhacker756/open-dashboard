@@ -24,9 +24,15 @@ const App = () => {
   useEffect(() => {
     const getBg = async () => {
       let bg_image;
+      // Check if there are any themes in local storage
+      // if so pick one at random
       if (user && user.theme[0]) {
-        bg_image = user.theme[0];
+        const randomIndex = Math.floor(Math.random() * user.theme.length);
+        const randomThemeChoice = user.theme[randomIndex];
+        console.log(`Background set to ${randomThemeChoice}`);
+        bg_image = randomThemeChoice;
       } else {
+        // Set theme to nature if none in local storage
         bg_image = "nature";
       }
 
@@ -48,14 +54,16 @@ const App = () => {
 
   return (
     <>
-      {/* Check if the name, location, theme and verified exits in the localstorage aka, if the user is new or existing */}
+      {/* Check if the name, location, theme and verified exits in the localstorage aka, 
+      if the user is new or existing. The user will be null if the fields aren't filled out
+      and so the Hello component will be rendered. */}
       {!user ? (
         <Hello />
       ) : (
         <div
           className="main__container h-screen px-5 py-2] bg-opacity-75 bg-cover bg-black"
           style={{
-            background: `url(${bg})`,
+            backgroundImage: `url(${bg})`,
             backgroundSize: "cover", //Image is fetched as per the user's preference
           }}
         >

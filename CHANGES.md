@@ -1,27 +1,32 @@
 # Changes
 
-I couldn't recreate the original issue but I looked through your code and thought I would have a little go at contributing, this is my first time.
+This is the first time I've contributed to someone elses repo. I came across this app and thought I'd have a go.
 
 I refactored in some places, rearranging some of the useEffect hooks and functions they use.
 
-I don't think its necessary to set the local storage properties to NA so I made some changes around that too. You can check if the property exists if you need to use it in a condition. eg:
+I removed where the local storage is set to NA and initiate user as null.
 
-    if (!localStorage.getItem("name")) {
-      // not stored in local storage
-    }
+## FIX: Adding a theme using the personalize button on the dashboard
 
-## FIX
-
-I noticed this bug while playing around with the dashboard.
-
-### Adding a theme using the personalize button on the dashboard didn't add the new theme.
+This would overwrite the previous themes in the array instead of adding to them.
 
 I fixed (in Personalize.jsx) by setting theme in storage to themeChoice instead of user.theme. This is because the setUser() wouldn't have updated yet and will still hold the previous state.
 
     setUser({ ...user, theme: themeChoice });
     user.theme  // this won't have the new them choice yet
 
-## Notes
+## Using all image themes
 
-- I noticed that some of the lighter background images make it hard to see the hamburger and cog icons.
-- There are three themes allowed to be saved, but how are these used?
+I couldn't see where all user themes were used so I added a random number to pick one from the array each time.
+
+## FIX Style Warning
+
+This was causing a warning in the dev tool console:
+
+    background: `url(${bg})`,
+
+I changed it to this:
+
+    backgroundImage: `url(${bg})`,
+
+I was saying something about using shorthand to set background property. This also seemed to fix a strange re-rendering of background image that was happening.
