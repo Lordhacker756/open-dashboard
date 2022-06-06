@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Greetings from "./Components/Greetings";
 import Quote from "./Components/Quote";
 import Time from "./Components/Time";
@@ -19,11 +19,17 @@ const App = () => {
   const [todo, setTodo] = useState(false); //Stores the notes
   const [settings, setSettings] = useState(false); // stores toggle state of settings box
   const [personalize, setPersonalize] = useState(false); //stores toggle state of personalize box
-  const [bg, setBg] = useState(fallBackImage)
+  //const [bg, setBg] = useState(fallBackImage)
 
-  var bg_image
+  //Function to fetch the theme from the localstorage, if found, assign it to bg_image, else assign "nature"
+  const bg_image = () => {
+    let storageImg = JSON.parse(localStorage.getItem('theme')).toString(); 
+    if(!storageImg) return "nature"
+    return storageImg
+  }
 
-  const getBg = async() =>{
+  /*
+  const getBg = async() => {
     try {
       const res = await fetch(`https://source.unsplash.com/random/1366x768/?${bg_image}`)
        if(res.url){
@@ -33,32 +39,24 @@ const App = () => {
       console.error(e);
     }
   }
-
-  function initBg(){ //Function to fetch the theme from the localstorage, if found, assign it to bg_image, else assign "nature"
-    bg_image = JSON.parse(localStorage.getItem('theme')).toString(); 
-    if(!bg_image)
-    {
-      bg_image = "nature"
-    }
-  }
  
   //Calling the function to fetch the theme after the loading of the page is completed
   useEffect(() => {
-    initBg()
-    getBg();
-    }, [])
+      getBg();
+      // eslint-disable-next-line
+    }, [])*/
 
   return (
     <> 
     {/* Check if the name, location, theme and verified exits in the localstorage aka, if the user is new or existing */}
-    {console.log(((user.currLocation==="\"NA\"") && (user.name==="\"NA\"") && (user.verified==="\"NA\"")))}
-      {((user.currLocation==="\"NA\"") && (user.name==="\"NA\"") && (user.verified==="\"NA\"")) ? (
+    {console.log(!user.name || !user.currLocation || !user.verified)}
+      {(!user.name || !user.currLocation || !user.verified) ? (
         <Hello /> 
       ) : (
         <div 
           className="main__container h-screen px-5 py-2] bg-opacity-75 bg-cover bg-black"
           style={{
-            background: `url(${bg})`, backgroundSize:'cover' //Image is fetched as per the user's preference
+            "background-image": `url(https://source.unsplash.com/random/1366x768/?${bg_image()}), url(${fallBackImage})`, "background-size":'cover' //Image is fetched as per the user's preference
           }}
         >
           <div className="upper_container h-[10%] flex justify-between items-center"> 
@@ -93,7 +91,7 @@ const App = () => {
                 What are the task for the day
               </div>
               <div className="mini_todo_container">
-                <ToDoMini /> {/* Todo input container */}
+                <ToDoMini openTodos={() => setTodo(true)} /> {/* Todo input container */}
               </div>
             </div>
             <div className="main_tasks ">

@@ -1,10 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { User } from "../Contexts/UserContext";
 
 const Personalize = ({personalize, setPersonalize}) => {
   const [category, setCategory] = useState(""); //Store individual category
   const [themeChoice, setThemeChoice] = useState([]); // category array
   const {user,setUser} = useContext(User)
+
+  useEffect(() => {
+    setThemeChoice(JSON.parse(localStorage.getItem("theme")))
+  }, [personalize])
 
   return (
     <div className="absolute bottom-10 bg-black h-[40vh] w-full bg-opacity-40 rounded-lg p-4 shadow-lg">
@@ -20,6 +24,12 @@ const Personalize = ({personalize, setPersonalize}) => {
             Enter max 3 categories for your wallpapers one at a time
           </p>
           {/* Input for entering the categories */}
+          <form onSubmit={(e) => {
+            e.preventDefault()
+            setThemeChoice([...themeChoice,category])
+              // onclick, clear the input and add the category to theme choice array
+              setCategory("")
+          }}>
           <input
             className="w-[80%] bg-transparent border-2 border-white mt-1 rounded-l-full px-3 placeholder:text-white text-white focus:outline-none font-light"
             type="text"
@@ -35,19 +45,15 @@ const Personalize = ({personalize, setPersonalize}) => {
           <button
             className="border-2 border-white border-l-0 bg-[#00D26A]"
             disabled={themeChoice.length>2 || (!category)}
-            onClick={() => {setThemeChoice([...themeChoice,category]
-            )
-            // onclick, clear the input and add the category to theme choice array
-            setCategory("")
-            }}
-          >
+            type="submit">
             ✅
           </button>
+          </form>
           {/* Render the user categories of user input as pills with x button */}
           <div className="choices flex mt-3">
           {themeChoice.map((elem,key)=>{
              return <div className="flex border-[2px] mx-1 border-white rounded-full w-fit px-3 items-center" key={key}><p className="mr-2">{elem}</p><button className="hover:text-red-500" onClick={()=>{
-                 setThemeChoice(themeChoice.filter((elem,k)=>k!=key))
+                 setThemeChoice(themeChoice.filter((elem,k)=>k !== key))
              }}>x</button></div>
          })}
           </div>

@@ -3,7 +3,7 @@ import { User } from "../Contexts/UserContext";
 import { CgSpinner } from "react-icons/cg";
 
 const Hello = () => {
-  const { user, setUser } = useContext(User);
+  const { setUser } = useContext(User);
   const [name, setName] = useState();
   const [location, setLocation] = useState();
   const [loading, setLoading] = useState();
@@ -15,9 +15,9 @@ const Hello = () => {
       <div className="h-screen bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex justify-center items-center flex-col">
         <h1 className="text-white text-7xl my-3">Hello there!</h1>
         <h1 className="text-white text-2xl">Let's get you started!</h1>
-        <button className="mt-4 px-5 py-1 border-2 border-white rounded-full text-white animate-bounce">
-          <a href="#name">Let's Go!</a>
-        </button>
+        <a href="#name" className="mt-4 px-5 py-1 border-2 border-white rounded-full text-white animate-bounce">
+          Let's Go!
+        </a>
       </div>
 
       <div
@@ -56,6 +56,11 @@ const Hello = () => {
           <p className="text-white font-light text-xs my-1">
             Enter max 3 categories for your wallpapers one at a time
           </p>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            setThemeChoice([...themeChoice, category]);
+            setCategory("");
+          }}>
           <input
             className="w-72 bg-transparent border-b-2 border-white mt-1 px-1 placeholder:text-white text-white focus:outline-none"
             type="text"
@@ -71,13 +76,11 @@ const Hello = () => {
           <button
             className="border-2 border-[#00D26A] rounded-full  bg-[#00D26A]"
             disabled={themeChoice.length > 2 || !category}
-            onClick={() => {
-              setThemeChoice([...themeChoice, category]);
-              setCategory("");
-            }}
+            type="submit"
           >
             ✅
           </button>
+          </form>
         </div>
         <div className="choices flex mt-3">
           {themeChoice.map((elem, key) => {
@@ -90,7 +93,7 @@ const Hello = () => {
                 <button
                   className="hover:text-red-500"
                   onClick={() => {
-                    setThemeChoice(themeChoice.filter((elem, k) => k != key));
+                    setThemeChoice(themeChoice.filter((elem, k) => k !== key));
                   }}
                 >
                   x
@@ -116,7 +119,7 @@ const Hello = () => {
             }
           }}
         >
-          {!loading ? <a>Let's Go!</a> : <CgSpinner className="animate-spin" />}
+          {!loading ? "Let's Go!" : <CgSpinner className="animate-spin" />}
         </button>
       </div>
     </div>
