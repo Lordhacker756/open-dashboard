@@ -50,14 +50,14 @@ const App = () => {
   return (
     <>
       {/* Check if the name, location, theme and verified exits in the localstorage aka, if the user is new or existing */}
-      {console.log(!user.name || !user.currLocation || !user.verified)}
+      {/* {console.log(!user.name || !user.currLocation || !user.verified)} */}
       {(!user.name || !user.currLocation || !user.verified) ? (
         <Hello />
       ) : (
         <div
           className="main__container h-screen px-5 py-2] bg-opacity-75 bg-cover bg-black"
           style={{
-            "background-image": `url(https://source.unsplash.com/random/1366x768/?${bg_image()}), url(${fallBackImage})`, "background-size": 'cover' //Image is fetched as per the user's preference
+            "backgroundImage": `url(https://source.unsplash.com/random/1366x768/?${bg_image()}), url(${fallBackImage})`, "backgroundSize": 'cover' //Image is fetched as per the user's preference
           }}
         >
           <div className="upper_container h-[10%] flex justify-between items-center">
@@ -88,7 +88,7 @@ const App = () => {
               <Time /> {/* Time container */}
             </div>
             <div className="bg-black bg-opacity-30 rounded-3xl px-7 my-3">
-              <PomodoroTimer />
+              <PomodoroTimer /> {/* Pomodoro Container */}
             </div>
             <div className="todo_main_container bg-black py-1 pb-3 rounded-lg px-3 bg-opacity-40 mt-4">
               <div className="main_tasks text-white text-xl mt-3">

@@ -3,6 +3,7 @@ import {
     useEffect,
     useState
 } from "react";
+import beep from '../sounds/beep-07a.mp3'
 
 export const User = createContext();
 
@@ -14,7 +15,7 @@ const UserContext = ({
     //User state to store name, current location, verified status and theme
     const [user, setUser] = useState(initUser())
     // pomodoro
-  
+
 
     //To pull tshe notes from localstorage on first loading
     function initNotes() {
@@ -34,9 +35,10 @@ const UserContext = ({
             theme: JSON.parse(localStorage.getItem('theme'))
         })
     }
+    // state to control the initial time
     const [initialTime, setIntialTime] = useState(0)
     const [timer, setTimer] = useState()
-    //  pomodor timer 
+    //  pomodoro timer, function takes in a paramater that is the intial time 
     const startPomodoro = (initialTime) => {
         const timer = setInterval((initialTime) => {
             setIntialTime((initialTime) => initialTime - 1);
@@ -44,18 +46,36 @@ const UserContext = ({
                 clearInterval(timer);
             }
         }, 1000);
-        setTimer(timer);    
+        setTimer(timer);
     }
 
+    // function to play the audio when timer ends
+    const audio = new Audio(beep)
+    const playAudio = () => {
+        const audioPromise = audio.play()
+        if (audioPromise !== undefined) {
+            audioPromise
+                .then(_ => {
+                    // autoplay started
+                    audio.play()
+                })
+                .catch(err => {
+                    // catch dom exception
+                    console.info(err)
+                })
+        }
+    }
+    
     useEffect(() => {
         if (initialTime === 0) {
-          clearInterval(timer);
+            playAudio()
+            clearInterval(timer);
         }
-      }, [initialTime, timer]);
+    }, [initialTime, timer]);
 
-      useEffect(() => {
+    useEffect(() => {
         return () => clearInterval(timer);
-      }, [timer]);
+    }, [timer]);
 
     // Run the initializing function on first load
     useEffect(() => {
@@ -71,12 +91,13 @@ const UserContext = ({
 
     // update localstorage when wallpaper categories are modified
     useEffect(() => {
-        console.log("Context effect fired");
+        // console.log("Context effect fired");
         localStorage.setItem('theme', JSON.stringify(user.theme))
     }, [user.theme])
 
-    return <User.Provider value = {  {user,setUser,notes,setNotes, setIntialTime,initialTime, startPomodoro}} > {children}
-     </User.Provider>
+    return <User.Provider value = {{user,setUser,notes,setNotes,setIntialTime,initialTime,startPomodoro,timer}} > {
+            children
+        } </User.Provider>
 }
 
 export default UserContext;

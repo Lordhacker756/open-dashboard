@@ -1,5 +1,4 @@
-import { useContext, useState } from 'react'
-import { AiOutlineClockCircle } from 'react-icons/ai'
+import { useContext, useState} from 'react'
 import { User } from "../../Contexts/UserContext";
 
 const CustomPomodoro = () => {
@@ -10,7 +9,11 @@ const CustomPomodoro = () => {
   }
   let secs = initialTime
   let formatedTime = new Date(secs * 1000).toISOString().substring(14, 19);
-  return (  
+  return ( initialTime ? 
+    <div>
+      {formatedTime}
+    </div>
+    :
     <ul className='flex '>
     <button className='px-3' onClick={() => {
       setIntialTime(900)
@@ -33,7 +36,6 @@ const CustomPomodoro = () => {
       onChange={handleChange}
       style={{ color: 'white'}}
        />
-       <button>Start</button>
     </form>
   </ul>
   );

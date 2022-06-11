@@ -10,7 +10,7 @@ const Weather = () => {
 const {user} = useContext(User);
 
 const getWeather = () => {
-  console.log(shorts)
+  // console.log(shorts)
   // Url to fetch the real time weather location as per the user's location 
     fetch(`https://api.weatherapi.com/v1/forecast.json?key=f3d41b9faf0b4d679ad132824223005&q=${user.currLocation}&days=1&aqi=no&alerts=no`)
     .then(res => {
