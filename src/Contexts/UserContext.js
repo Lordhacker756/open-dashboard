@@ -46,6 +46,7 @@ const UserContext = ({
                 clearInterval(timer);
             }
         }, 1000);
+ 
         setTimer(timer);
     }
 
@@ -55,7 +56,7 @@ const UserContext = ({
         const audioPromise = audio.play()
         if (audioPromise !== undefined) {
             audioPromise
-                .then(_ => {
+                .then(() => {
                     // autoplay started
                     audio.play()
                 })
@@ -65,17 +66,12 @@ const UserContext = ({
                 })
         }
     }
-    
     useEffect(() => {
         if (initialTime === 0) {
             playAudio()
             clearInterval(timer);
         }
     }, [initialTime, timer]);
-
-    useEffect(() => {
-        return () => clearInterval(timer);
-    }, [timer]);
 
     // Run the initializing function on first load
     useEffect(() => {
@@ -95,9 +91,20 @@ const UserContext = ({
         localStorage.setItem('theme', JSON.stringify(user.theme))
     }, [user.theme])
 
-    return <User.Provider value = {{user,setUser,notes,setNotes,setIntialTime,initialTime,startPomodoro,timer}} > {
-            children
-        } </User.Provider>
+    return <User.Provider value = {
+        {
+            user,
+            setUser,
+            notes,
+            setNotes,
+            setIntialTime,
+            initialTime,
+            startPomodoro,
+            timer
+        }
+    } > {
+        children
+    } < /User.Provider>
 }
 
 export default UserContext;
