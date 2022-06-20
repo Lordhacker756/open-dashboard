@@ -50,7 +50,7 @@ const Greetings = () => {
   return (
     <div>
     {/* Render the greeting as per the requirement */}
-      <h1 className="text-white font-thin text-5xl">{`${greet()}${user.name}`}</h1>
+      <h1 className="text-white font-bold text-5xl">{`${greet()}${user.name}`}</h1>
     </div>
   );
 };

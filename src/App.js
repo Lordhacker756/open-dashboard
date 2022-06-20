@@ -75,7 +75,7 @@ const App = () => {
                 <p className="text-white font-base">Pomodoro</p>
                 <MdOutlineTimer style={{ color: "white" }} size={25} />
               </div>
-              {pomodoroToggle && <Pomodoro setpomodoroToggle={setpomodoroToggle}/>}
+              {pomodoroToggle && <Pomodoro pomodoroToggle={pomodoroToggle}  setpomodoroToggle={setpomodoroToggle}/>}
               <Time /> {/* Time container */}
             </div>
             <div className="todo_main_container bg-black py-1 pb-3 rounded-lg px-3 bg-opacity-40 mt-4">
