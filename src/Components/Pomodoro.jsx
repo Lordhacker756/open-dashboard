@@ -1,7 +1,8 @@
 import React from "react";
 import { useEffect,useState } from "react";
+import {GrClose} from 'react-icons/gr'
 
-const Pomodoro = () => {
+const Pomodoro = ({pomodoroToggle,setpomodoroToggle}) => {
 
 const [pomodoro, setPomodoro] = useState({
   isSet:false,
@@ -19,14 +20,16 @@ useEffect(() => {
   stopCountdown()
 }, [counter])
 
-
-useEffect(() => {
-  setCounter(pomodoro.duration)
-}, [pomodoro])
-
-
   return (
     <div className="pomodoro__container absolute top-0 left-0 h-[100%] w-[100%] bg-gradient-to-r from-[#4776E6] to-[#8E54E9] z-20 bg-opacity-90">
+    <GrClose className="absolute right-5 top-5"  style={{ color: "white" }} size={25}
+                onClick={() => {
+                  if (pomodoroToggle) {
+                    setpomodoroToggle(false);
+                  } else {
+                    setpomodoroToggle(true);
+                  }
+                }}/>
       {pomodoro.isSet && pomodoro.duration ? (
         <div className="time__container flex items-center justify-center h-screen">
           <p className="time text-9xl text-white">{counter}</p>
