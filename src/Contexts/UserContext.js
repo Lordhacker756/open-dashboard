@@ -24,7 +24,7 @@ const UserContext = ({ children }) => {
             name:(localStorage.getItem('name')),
             currLocation:(localStorage.getItem('currLocation')),
             verified:(localStorage.getItem('verified')),
-            theme:JSON.parse(localStorage.getItem('theme'))
+            theme:JSON.parse(localStorage.getItem('theme')),
         })
     }
 
@@ -34,7 +34,6 @@ const UserContext = ({ children }) => {
         initUser();
     }, [])
 
-
     //To update the note to localstorage whenever the note is updated
     useEffect(() => {
         localStorage.setItem('notes', JSON.stringify(notes))
@@ -42,9 +41,10 @@ const UserContext = ({ children }) => {
 
    // update localstorage when wallpaper categories are modified
      useEffect(()=>{
-         console.log("Context effect fired");
+        //  console.log("Context effect fired");
          localStorage.setItem('theme',JSON.stringify(user.theme))
      },[user.theme])
+
 
     return <User.Provider value={{ user, setUser, notes, setNotes}}>{children}</User.Provider>
 }

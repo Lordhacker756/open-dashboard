@@ -7,20 +7,24 @@ function greet() {
   var time = moment().format("a"); //Gives am or pm
   var h = moment().format("h"); //gives the hours
   var greetMsg = "";
-
+  // console.log(`${time}  ${h}`)
   // During mornign time, if it's am
   if (time === "am") {
-    if (h < 2 || h === 12) //Early morning time (12AM-2AM)
+    if(h==12)
+    {
+      greetMsg="Good Morning! Hustler💪🏻";
+    }
+    if (h < 2) //Early morning time (12AM-2AM)
     greetMsg = "Good Morning! Hustler💪🏻";
     else if (h<6) // 3AM - 5AM
     greetMsg = "Good Morning! Ealry Bird😇";
-    else // 6AM-12PM
+    else if (h>7 && h<12)// 6AM-12PM
     greetMsg = "Own The Day😎"
   } 
 
   else if(time === "pm")
   {
-    if(h===12 || h<4) //12PM-3PM
+    if(h==12 || h<4) //12PM-3PM
     {
       greetMsg="Good Afternoon🌞"
     }

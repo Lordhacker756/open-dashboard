@@ -107,7 +107,6 @@ const Hello = () => {
           className="mt-4 px-5 py-1 border-2 border-white rounded-full text-white"
           onClick={() => {
             if (name && location) {
-              console.log(name, location);
               setLoading(true);
               setTimeout(() => {
                 localStorage.setItem("name", name);
