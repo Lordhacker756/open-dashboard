@@ -72,7 +72,7 @@ const App = () => {
             </div>
             <div className="time_conatiner bg-black bg-opacity-50 rounded-3xl px-7 ">
               <div
-                className="pomodoro__container absolute right-[45%] bottom-6 cursor-pointer hover:bg-white hover:bg-opacity-40 flex items-center px-5 py-1 justify-center rounded-full border-2 border-white bg-black bg-opacity-40 shadow-2xl"
+                className="pomodoro__container absolute right-[47%] bottom-5 cursor-pointer hover:bg-white hover:bg-opacity-40 flex items-center px-5 py-1 justify-center rounded-full border-2 border-white bg-black bg-opacity-40 shadow-2xl"
                 onClick={() => setpomodoroToggle(true)}
               >
                 <p className="text-white font-base mr-1">Pomodoro</p>

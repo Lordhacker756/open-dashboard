@@ -77,7 +77,7 @@ const Pomodoro = ({ pomodoroToggle, setpomodoroToggle }) => {
             <button
               className="text-white border-2 hover:bg-white hover:bg-opacity-40 hover:scale-105 transition-all ease-in border-white rounded-full px-3 py-1 m-3"
               onClick={() => {
-                setIntialTime(10);
+                setIntialTime(1800);
                 startPomodoro(initialTime);
               }}
             >
