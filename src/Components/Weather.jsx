@@ -47,17 +47,17 @@ function toggleDetails(){
     <div className="text-white main_container relative">
       {/* For people who havent configured weather we have this button */}
       <div className="weather_div">
-        <button className="border-2 bg-black bg-opacity-40 border-white rounded-full w-40 py-1 flex items-center justify-evenly" onClick={toggleDetails}>
+        <button className="border-2 bg-black bg-opacity-60 border-white rounded-full w-40 py-1 flex items-center justify-evenly" onClick={toggleDetails}>
           {shorts}
           <TiWeatherSunny />
         </button>
         {/* Show the weather if the toggle state is true */}
         {(weather)?
         weather === "Location not found" ? 
-        <div className={`search_container mt-1 absolute bg-black bg-opacity-40 w-auto h-auto px-2 py-3 rounded-lg ${(details)?'block':'hidden'}`}>
+        <div className={`search_container mt-1 absolute bg-black bg-opacity-60 w-auto h-auto px-2 py-3 rounded-lg ${(details)?'block':'hidden'}`}>
           <p>Location not found</p>
         </div> :
-        <div className={`search_container mt-1 absolute bg-black bg-opacity-40 w-auto h-auto px-2 py-3 rounded-lg ${(details)?'block':'hidden'}`}>
+        <div className={`search_container mt-1 absolute bg-black bg-opacity-60 shadow-2xl w-auto h-auto px-2 py-3 rounded-lg ${(details)?'block':'hidden'}`}>
           <div className="search_bar flex justify-center items-center w-40 flex-col">
            <img src={weather.current.condition.icon} alt="" />
            <h1>{weather.current.temp_c} Degrees</h1>

@@ -20,7 +20,7 @@ const App = () => {
   const { user } = useContext(User); //importing the user context which holds the values => name, verified status, theme and current location
   const [todo, setTodo] = useState(false); //Stores the notes
   const [settings, setSettings] = useState(false); // stores toggle state of settings box
-  const [pomodoroToggle, setpomodoroToggle ] = useState(false)
+  const [pomodoroToggle, setpomodoroToggle] = useState(false);
   const [personalize, setPersonalize] = useState(false); //stores toggle state of personalize box
   //const [bg, setBg] = useState(fallBackImage)
 
@@ -41,8 +41,8 @@ const App = () => {
         <div
           className="main__container h-screen px-5 py-2] bg-opacity-75 bg-cover bg-black"
           style={{
-            "backgroundImage": `url(https://source.unsplash.com/random/1366x768/?${bg_image()}), url(${fallBackImage})`,
-            "backgroundSize": "cover", //Image is fetched as per the user's preference
+            backgroundImage: `url(https://source.unsplash.com/random/1366x768/?${bg_image()}), url(${fallBackImage})`,
+            backgroundSize: "cover", //Image is fetched as per the user's preference
           }}
         >
           <div className="upper_container h-[10%] flex justify-between items-center">
@@ -71,16 +71,24 @@ const App = () => {
               <Greetings /> {/* Greeting container */}
             </div>
             <div className="time_conatiner bg-black bg-opacity-50 rounded-3xl px-7 ">
-              <div className="pomodoro__container absolute right-[45%] bottom-5 cursor-pointer hover:bg-white hover:bg-opacity-40 flex items-center px-5 justify-center rounded-full border-2 border-white" onClick={()=>setpomodoroToggle(true)}>
-                <p className="text-white font-base">Pomodoro</p>
-                <MdOutlineTimer style={{ color: "white" }} size={25} />
+              <div
+                className="pomodoro__container absolute right-[45%] bottom-6 cursor-pointer hover:bg-white hover:bg-opacity-40 flex items-center px-5 py-1 justify-center rounded-full border-2 border-white bg-black bg-opacity-40 shadow-2xl"
+                onClick={() => setpomodoroToggle(true)}
+              >
+                <p className="text-white font-base mr-1">Pomodoro</p>
+                <MdOutlineTimer style={{ color: "white" }} size={20} />
               </div>
-              {pomodoroToggle && <Pomodoro pomodoroToggle={pomodoroToggle}  setpomodoroToggle={setpomodoroToggle}/>}
+              {pomodoroToggle && (
+                <Pomodoro
+                  pomodoroToggle={pomodoroToggle}
+                  setpomodoroToggle={setpomodoroToggle}
+                />
+              )}
               <Time /> {/* Time container */}
             </div>
-            <div className="todo_main_container bg-black py-1 pb-3 rounded-lg px-3 bg-opacity-40 mt-4">
-              <div className="main_tasks text-white text-xl mt-3">
-                What are the task for the day
+            <div className="todo_main_container bg-black py-1 pb-3 rounded-lg px-10 bg-opacity-60 mt-4 shadow-2xl">
+              <div className="main_tasks text-white text-2xl mt-3">
+                What are the task for the day?
               </div>
               <div className="mini_todo_container">
                 <ToDoMini openTodos={() => setTodo(true)} />{" "}
@@ -109,7 +117,7 @@ const App = () => {
             <div className="personalize text-white w-[28vw] flex justify-end relative">
               {/* Button to toggle the personalization menu */}
               <button
-                className="flex items-center border-2 border-white rounded-full px-3 py-1 bg-black bg-opacity-40"
+                className="flex items-center border-2 border-white rounded-full px-3 py-1 bg-black bg-opacity-40 hover:bg-white hover:bg-opacity-40"
                 onClick={() => {
                   if (personalize) {
                     setPersonalize(false);

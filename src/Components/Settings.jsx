@@ -8,14 +8,14 @@ const Settings = () => {
 
   return (
     // Settings div
-    <div className="absolute bottom-6 bg-black h-[40vh] w-full bg-opacity-40 rounded-lg p-4">
+    <div className="absolute bottom-6 bg-black h-[40vh] w-full bg-opacity-60 rounded-lg p-4 shadow-2xl">
       <div className="location_settings">
-        <p className="text-white text-xl font-light">User Settings⚙️</p>
+        <p className="text-white text-3xl">User Settings⚙️</p>
         <div className="name_settings">
-          <p className="text-white mt-3 font-light">Update Name✒️</p>
+          <p className="text-white mt-3 text-lg">Update Name✒️</p>
           {/* Input for updated value of location */}
           <input
-            className="w-[80%] bg-transparent border-2 border-white mt-1 rounded-l-full px-3 placeholder:text-white text-white focus:outline-none font-light"
+            className="w-[80%] bg-transparent mt-2 border-2 border-white rounded-l-full px-3 placeholder:text-white text-white focus:outline-none font-light"
             type="text"
             name="location"
             id="location"
@@ -37,10 +37,10 @@ const Settings = () => {
           </button>
         </div>
 
-        <p className="text-white mt-3 font-light">Update Location🗺️</p>
+        <p className="text-white mt-3 text-lg">Update Location🗺️</p>
         {/* Input for updated location */}
         <input
-          className="w-[80%] bg-transparent border-2 border-white mt-1 rounded-l-full px-3 placeholder:text-white text-white focus:outline-none font-light"
+          className="w-[80%] bg-transparent border-2 border-white mt-2 rounded-l-full px-3 placeholder:text-white text-white focus:outline-none font-light"
           type="text"
           name="location"
           id="location"

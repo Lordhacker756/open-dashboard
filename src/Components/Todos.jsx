@@ -17,7 +17,7 @@ const Todos = () => {
 
   return (
     // Todo react component
-    <div className="absolute bg-white w-[25vw] h-96 bg-opacity-60 rounded-xl p-2 overflow-y-scroll todo_container shadow-xl">
+    <div className="absolute bg-white w-[25vw] h-96 bg-opacity-60 rounded-xl p-2 overflow-y-scroll todo_container shadow-2xl">
     {/* Show the notes if the toggle state is set to true */}
       {notes &&
         notes.map((elem, key) => {

@@ -16,7 +16,7 @@ This current version is the basic version of the app with the basic features lik
 
 ## Setting Up The App
 
-**If you want a quick preview of the app you can directly visit this [link](https://open-dashboard.vercel.app/) (Reload the page, if you see null value in name, It's a bug🪲)**
+**If you want a quick preview of the app you can directly visit this [link](https://open-dashboard.vercel.app/)
 
 ### To use the chrome extension
 
@@ -25,8 +25,6 @@ This current version is the basic version of the app with the basic features lik
 * Go to chrome -> extensions -> developer mode -> add unpacked
 * Select the build folder and add it
 * Open a new tab and see your very own dashboard😄
-
-  **If you don't get the hello screen, try to reload the page, you'll reach the hello page🪲
 
 ### To setup the app in local system
 
