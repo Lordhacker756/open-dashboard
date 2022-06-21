@@ -13,6 +13,7 @@ const UserContext = ({ children }) => {
   const [timer, setTimer] = useState();
   //  pomodoro timer, function takes in a paramater that is the intial time
   const startPomodoro = (initialTime) => {
+    localStorage.removeItem('pomodoro')
     const timer = setInterval((initialTime) => {
       setIntialTime((initialTime) => initialTime - 1);
       if (initialTime === 0) {
@@ -25,7 +26,13 @@ const UserContext = ({ children }) => {
 
   useEffect(() => {
     if (initialTime === 0) {
+      if(localStorage.getItem('pomodoro')==="completed")
+      {
         playAudio();
+        setTimeout(()=>{
+          localStorage.removeItem('pomodoro')
+        },3000)
+      }
         clearInterval(timer);
     }
 }, [initialTime, timer]);

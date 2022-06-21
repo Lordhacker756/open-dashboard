@@ -6,7 +6,7 @@
 }
 
 .todo_container::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
 }
 
 .todo_container::-webkit-scrollbar-track {
@@ -14,6 +14,6 @@
 }
 
 .todo_container::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(255, 255, 255, 0.6);
     border-radius: 20px;
 }

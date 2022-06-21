@@ -11,7 +11,6 @@ import { User } from "../Contexts/UserContext";
 const Pomodoro = ({ pomodoroToggle, setpomodoroToggle }) => {
   const { setIntialTime, initialTime, startPomodoro } = useContext(User);
   const [timer, setTimer] = useState();
-  const [pausedTimer, setpausedTimer] = useState()
 
   useEffect(() => {
     console.log(initialTime < 0);
@@ -27,19 +26,9 @@ const Pomodoro = ({ pomodoroToggle, setpomodoroToggle }) => {
     {
       document.title = "⏲️ Completed 🥳"
       setTimeout(()=>document.title="Open Dashboard",5000)
+      localStorage.setItem('pomodoro',"completed")
     }
   }, [initialTime]);
-
-  function pausePomodoro()
-  {
-    localStorage.setItem('pomodoro',JSON.stringify(initialTime))
-
-  }
-
-  function resumePomodoro()
-  {
-
-  }
 
   function clearPomodoro()
   {
@@ -48,7 +37,7 @@ const Pomodoro = ({ pomodoroToggle, setpomodoroToggle }) => {
   }
 
   return (
-    <div className="pomodoro__container absolute top-0 left-0 h-[100%] w-[100%] bg-gradient-to-r from-[#4776E6] to-[#8E54E9] z-20 bg-opacity-90">
+    <div className="pomodoro__container absolute top-0 left-0 h-[100%] w-[100%] bg-black z-20">
       <AiOutlineClose
         className="absolute right-5 top-5 hover:animate-spin"
         style={{ color: "white" }}
@@ -63,6 +52,7 @@ const Pomodoro = ({ pomodoroToggle, setpomodoroToggle }) => {
       />
       {initialTime > 0 ? (
         <div className="time__container flex items-center justify-center h-screen flex-col">
+        <p className="text-white absolute top-5">Press F11 or Fn+F11 to go Full Screen! 💡</p>
           <p className="time text-[20rem] text-white">{timer}</p>
           <div className="btn_container flex mt-10">
             {/* <BsPauseCircle className="mx-3 cursor-pointer" style={{color:'white'}} size={45} onClick={()=>{pausePomodoro()}}/> */}
@@ -77,7 +67,7 @@ const Pomodoro = ({ pomodoroToggle, setpomodoroToggle }) => {
             <button
               className="text-white border-2 hover:bg-white hover:bg-opacity-40 hover:scale-105 transition-all ease-in border-white rounded-full px-3 py-1 m-3"
               onClick={() => {
-                setIntialTime(1800);
+                setIntialTime(5);
                 startPomodoro(initialTime);
               }}
             >

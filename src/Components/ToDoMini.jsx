@@ -11,7 +11,7 @@ const ToDoMini = ({openTodos}) => {
         <input
           type="text"
           placeholder="Enter A Task"
-          className="focus:bg-transparent bg-transparent placeholder:text-xl mt-3 focus:outline-none placeholder:text-white border-b-[2px]"
+          className="focus:bg-transparent bg-transparent placeholder:text-xl mt-3 focus:outline-none placeholder:text-white border-b-[2px] w-80"
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />

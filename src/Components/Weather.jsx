@@ -59,7 +59,7 @@ function toggleDetails(){
         </div> :
         <div className={`search_container mt-1 absolute bg-black bg-opacity-60 shadow-2xl w-auto h-auto px-2 py-3 rounded-lg ${(details)?'block':'hidden'}`}>
           <div className="search_bar flex justify-center items-center w-40 flex-col">
-           <img src={weather.current.condition.icon} alt="" />
+           <img src={'https:'+weather.current.condition.icon} alt="" />
            <h1>{weather.current.temp_c} Degrees</h1>
            <h1 className="text-[12px]">{weather.current.condition.text}</h1>
            <h1 className="text-[8px]">Last Updated: {weather.current.last_updated}</h1>
