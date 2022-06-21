@@ -70,7 +70,7 @@ const App = () => {
             <div className="greetings mb-5">
               <Greetings /> {/* Greeting container */}
             </div>
-            <div className="time_conatiner bg-black bg-opacity-30 rounded-3xl px-7 ">
+            <div className="time_conatiner bg-black bg-opacity-50 rounded-3xl px-7 ">
               <div className="pomodoro__container absolute right-[45%] bottom-5 cursor-pointer hover:bg-white hover:bg-opacity-40 flex items-center px-5 justify-center rounded-full border-2 border-white" onClick={()=>setpomodoroToggle(true)}>
                 <p className="text-white font-base">Pomodoro</p>
                 <MdOutlineTimer style={{ color: "white" }} size={25} />

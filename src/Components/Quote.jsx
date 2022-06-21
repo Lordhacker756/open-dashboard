@@ -13,7 +13,7 @@ function quoteSelector(){
 // Render the quote as per the index corresponding to the date
 const Quote = () => {
   return (
-    <div className='text-white mt-5 text-center font-normal text-3xl'>{quotes[quoteSelector()].q}</div>
+    <div className='text-white mt-5 text-center font-normal bg-black text-2xl bg-opacity-60 underline underline-offset-8 rounded-xl p-4'>{quotes[quoteSelector()].q}</div>
   )
 }
 
