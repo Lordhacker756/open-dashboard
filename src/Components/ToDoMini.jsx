@@ -11,7 +11,7 @@ const ToDoMini = ({openTodos}) => {
         <input
           type="text"
           placeholder="Enter A Task"
-          className="focus:bg-transparent bg-transparent placeholder:text-xl mt-3 focus:outline-none placeholder:text-white border-b-[2px] w-80"
+          className="focus:bg-transparent bg-transparent placeholder:text-xl text-xl mt-3 focus:outline-none placeholder:text-white border-b-[2px] w-80"
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
@@ -19,8 +19,8 @@ const ToDoMini = ({openTodos}) => {
           type="submit"
           onClick={(e) => {
             e.preventDefault(); //On submit
+            task && setNotes([...notes,task]); //Add the given note to the existing notes array
             setTask("") //Clear the current input value
-            setNotes([...notes,task]); //Add the given note to the existing notes array
             openTodos()
           }}
         >
