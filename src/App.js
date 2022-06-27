@@ -56,7 +56,7 @@ const App = () => {
         if(user.name || user.currLocation || user.verified){
             bg_image();
         }
-    });
+    }, [user.name, user.currLocation, user.verified]);
 
     return (
         <>
