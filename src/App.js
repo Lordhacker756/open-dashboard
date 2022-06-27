@@ -51,7 +51,6 @@ const App = () => {
         link.click()
         document.body.removeChild(link)
     }
-
     useEffect(() => {
         if(user.name || user.currLocation || user.verified){
             bg_image();
