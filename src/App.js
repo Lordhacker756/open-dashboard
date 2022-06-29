@@ -1,35 +1,66 @@
-import React, { useContext, useState } from "react";
+import { FaDownload, FaPaintBrush } from "react-icons/fa";
+import { FiMenu, FiSettings } from "react-icons/fi";
+import React, { useContext, useEffect, useState } from "react";
+
 import Greetings from "./Components/Greetings";
+import Hello from "./Components/Hello";
+import { MdOutlineTimer } from "react-icons/md";
+import Personalize from "./Components/Personalize";
+import Pomodoro from "./Components/Pomodoro";
 import Quote from "./Components/Quote";
+import Settings from "./Components/Settings";
 import Time from "./Components/Time";
 import ToDoMini from "./Components/ToDoMini";
-import Weather from "./Components/Weather";
-import { FiMenu } from "react-icons/fi";
-import { User } from "./Contexts/UserContext";
-import Hello from "./Components/Hello";
 import Todos from "./Components/Todos";
-import { FiSettings } from "react-icons/fi";
-import Settings from "./Components/Settings";
-import { FaPaintBrush } from "react-icons/fa";
-import Personalize from "./Components/Personalize";
+import { User } from "./Contexts/UserContext";
+import Weather from "./Components/Weather";
 import fallBackImage from "./data/fallback_bg.jpg";
-import { MdOutlineTimer } from "react-icons/md";
-import Pomodoro from "./Components/Pomodoro";
 
-const App = () => {
-  const { user } = useContext(User); //importing the user context which holds the values => name, verified status, theme and current location
-  const [todo, setTodo] = useState(false); //Stores the notes
+function App() {
+  const { user } = useContext(User); // importing the user context which holds the values => name, verified status, theme and current location
+  const [todo, setTodo] = useState(false); // Stores the notes
   const [settings, setSettings] = useState(false); // stores toggle state of settings box
   const [pomodoroToggle, setpomodoroToggle] = useState(false);
-  const [personalize, setPersonalize] = useState(false); //stores toggle state of personalize box
-  //const [bg, setBg] = useState(fallBackImage)
-
-  //Function to fetch the theme from the localstorage, if found, assign it to bg_image, else assign "nature"
-  const bg_image = () => {
-    let storageImg = JSON.parse(localStorage.getItem("theme")).toString();
-    if (!storageImg) return "nature";
-    return storageImg;
+  const [personalize, setPersonalize] = useState(false); // stores toggle state of personalize box
+  // const [bg, setBg] = useState(fallBackImage)
+  // Function to fetch the theme from the localstorage, if found, assign it to bgImage, else assign "nature"
+  const bgImage = () => {
+    const storageImg = JSON.parse(localStorage.getItem("theme")).toString();
+    if (!storageImg) {
+      document.getElementById("main-container").style.backgroundImage = `url(${{
+        fallBackImage,
+      }})`;
+    } else {
+      fetch(`https://source.unsplash.com/random/1366x768/?${storageImg}`).then(
+        (res) =>
+          (document.getElementById(
+            "main-container",
+          ).style.backgroundImage = `url(${res.url})`),
+      );
+    }
   };
+  // Function to get current background image and download it
+  const downloadImg = async () => {
+    const url = document
+      .getElementById("main-container")
+      .style.backgroundImage.slice(4, -1)
+      .replace(/"/g, "");
+    const filename = url.substring(url.indexOf("/p") + 1, url.lastIndexOf("?"));
+    const image = await fetch(url);
+    const imageBlog = await image.blob();
+    const imageURL = URL.createObjectURL(imageBlog);
+    const link = document.createElement("a");
+    link.href = imageURL;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  useEffect(() => {
+    if (user.name || user.currLocation || user.verified) {
+      bgImage();
+    }
+  }, [user.name, user.currLocation, user.verified]);
 
   return (
     <>
@@ -39,11 +70,8 @@ const App = () => {
         <Hello />
       ) : (
         <div
+          id="main-container"
           className="main__container h-screen px-5 py-2] bg-opacity-75 bg-cover bg-black"
-          style={{
-            backgroundImage: `url(https://source.unsplash.com/random/1366x768/?${bg_image()}), url(${fallBackImage})`,
-            backgroundSize: "cover", //Image is fetched as per the user's preference
-          }}
         >
           <div className="upper_container h-[10%] flex justify-between items-center">
             {/* Top container having the todo menu and weather app */}
@@ -134,12 +162,21 @@ const App = () => {
                   personalize={personalize}
                 />
               )}
+              <button
+                id="download-btn"
+                className="flex items-center border-2 border-white rounded-full px-3 py-1 bg-black bg-opacity-40 hover:bg-white hover:bg-opacity-40 mx-2"
+                onClick={() => {
+                  downloadImg().then((r) => r);
+                }}
+              >
+                Download
+                <FaDownload className="mx-2" />
+              </button>
             </div>
           </div>
         </div>
       )}
     </>
   );
-};
-
+}
 export default App;

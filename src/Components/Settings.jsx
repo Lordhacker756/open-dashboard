@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+
 import { User } from "../Contexts/UserContext";
 
 const Settings = () => {

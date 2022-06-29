@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
+
 import { User } from "../Contexts/UserContext";
 
-const ToDoMini = ({openTodos}) => {
+const ToDoMini = ({ openTodos }) => {
   const { notes, setNotes } = useContext(User); //get the notes and setNote from the user context
   const [task, setTask] = useState(); //stores the task input by the user
 
@@ -19,9 +20,9 @@ const ToDoMini = ({openTodos}) => {
           type="submit"
           onClick={(e) => {
             e.preventDefault(); //On submit
-            task && setNotes([...notes,task]); //Add the given note to the existing notes array
-            setTask("") //Clear the current input value
-            openTodos()
+            task && setNotes([...notes, task]); //Add the given note to the existing notes array
+            setTask(""); //Clear the current input value
+            openTodos();
           }}
         >
           ✏️

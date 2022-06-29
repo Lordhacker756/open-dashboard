@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { User } from "../Contexts/UserContext";
+
 import { AiOutlineDelete } from "react-icons/ai";
+import { User } from "../Contexts/UserContext";
 
 const Todos = () => {
   // Get the notes and setNotes state declared in the user context
-  const { notes, setNotes } = useContext(User); 
+  const { notes, setNotes } = useContext(User);
 
   // Function to delete the note on clicking the dustbin icon
   function deleteTask(key) {
@@ -18,17 +19,18 @@ const Todos = () => {
   return (
     // Todo react component
     <div className="absolute bg-black w-[25vw] h-96 bg-opacity-90 rounded-xl px-4 py-2 overflow-y-scroll todo_container shadow-2xl">
-    {/* Show the notes if the toggle state is set to true */}
+      {/* Show the notes if the toggle state is set to true */}
       {notes &&
         notes.map((elem, key) => {
           return (
-            <div className="todo flex items-start my-3 bg-white bg-opacity-20 justify-between p-4 rounded-2xl" key={key}>
-              <p className="w-[20vw] h-auto pr-4 flex flex-wrap">
-                {elem}
-              </p>
+            <div
+              className="todo flex items-start my-3 bg-white bg-opacity-20 justify-between p-4 rounded-2xl"
+              key={key}
+            >
+              <p className="w-[20vw] h-auto pr-4 flex flex-wrap">{elem}</p>
               <AiOutlineDelete
                 className="mt-1 cursor-pointer"
-                onClick={()=>deleteTask(key)}
+                onClick={() => deleteTask(key)}
               />
             </div>
           );
