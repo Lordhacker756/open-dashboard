@@ -1,9 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { useEffect, useState } from "react";
-import {BsPauseCircle} from "react-icons/bs"
-import {GrResume} from "react-icons/gr"
-import {BsStopCircle} from 'react-icons/bs'
+import { BsStopCircle } from "react-icons/bs";
 
 import { AiOutlineClose } from "react-icons/ai";
 import { User } from "../Contexts/UserContext";
@@ -20,20 +18,17 @@ const Pomodoro = ({ pomodoroToggle, setpomodoroToggle }) => {
     seconds = seconds < 10 ? "0" + seconds : seconds;
     var countdown = minutes + ":" + seconds;
     setTimer(countdown);
-    if(countdown!='0:00')
-    document.title = countdown + "⌛";
-    else
-    {
-      document.title = "⏲️ Completed 🥳"
-      setTimeout(()=>document.title="Open Dashboard",5000)
-      localStorage.setItem('pomodoro',"completed")
+    if (countdown !== "0:00") document.title = countdown + "⌛";
+    else {
+      document.title = "⏲️ Completed 🥳";
+      setTimeout(() => (document.title = "Open Dashboard"), 5000);
+      localStorage.setItem("pomodoro", "completed");
     }
   }, [initialTime]);
 
-  function clearPomodoro()
-  {
-    setTimer(0)
-    setIntialTime(0)
+  function clearPomodoro() {
+    setTimer(0);
+    setIntialTime(0);
   }
 
   return (
@@ -52,12 +47,21 @@ const Pomodoro = ({ pomodoroToggle, setpomodoroToggle }) => {
       />
       {initialTime > 0 ? (
         <div className="time__container flex items-center justify-center h-screen flex-col">
-        <p className="text-white absolute top-5">Press F11 or Fn+F11 to go Full Screen! 💡</p>
+          <p className="text-white absolute top-5">
+            Press F11 or Fn+F11 to go Full Screen! 💡
+          </p>
           <p className="time text-[20rem] text-white">{timer}</p>
           <div className="btn_container flex mt-10">
             {/* <BsPauseCircle className="mx-3 cursor-pointer" style={{color:'white'}} size={45} onClick={()=>{pausePomodoro()}}/> */}
             {/* <GrResume className="mx-3 cursor-pointer" style={{color:'white'}} size={45} onClick={()=>{resumePomodoro()}}/> */}
-            <BsStopCircle className="mx-3 cursor-pointer" style={{color:'white'}} size={45} onClick={()=>{clearPomodoro()}}/>
+            <BsStopCircle
+              className="mx-3 cursor-pointer"
+              style={{ color: "white" }}
+              size={45}
+              onClick={() => {
+                clearPomodoro();
+              }}
+            />
           </div>
         </div>
       ) : (

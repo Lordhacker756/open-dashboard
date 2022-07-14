@@ -15,6 +15,8 @@ import Personalize from "./Components/Personalize";
 import fallBackImage from "./data/fallback_bg.jpg";
 import { MdOutlineTimer } from "react-icons/md";
 import Pomodoro from "./Components/Pomodoro";
+import { motion } from "framer-motion";
+import Horoscope from "./Components/Horoscope";
 
 const App = () => {
   const { user } = useContext(User); //importing the user context which holds the values => name, verified status, theme and current location
@@ -22,8 +24,7 @@ const App = () => {
   const [settings, setSettings] = useState(false); // stores toggle state of settings box
   const [pomodoroToggle, setpomodoroToggle] = useState(false);
   const [personalize, setPersonalize] = useState(false); //stores toggle state of personalize box
-  //const [bg, setBg] = useState(fallBackImage)
-
+  const [horoscope, setHoroscope] = useState(false);
   //Function to fetch the theme from the localstorage, if found, assign it to bg_image, else assign "nature"
   const bg_image = () => {
     let storageImg = JSON.parse(localStorage.getItem("theme")).toString();
@@ -35,7 +36,7 @@ const App = () => {
     <>
       {/* Check if the name, location, theme and verified exits in the localstorage aka, if the user is new or existing */}
       {/* {console.log(!user.name || !user.currLocation || !user.verified)} */}
-      {!user.name || !user.currLocation || !user.verified ? (
+      {!user.name || !user.currLocation || !user.verified || !user.apiKey ? (
         <Hello />
       ) : (
         <div
@@ -67,17 +68,29 @@ const App = () => {
             </div>
           </div>
           <div className="middle_container  h-[80%] flex flex-col justify-center items-center">
+            {/* Horoscope Component! */}
+            <button
+              className="absolute left-[-50px] bg-black bg-opacity-60 text-white px-4 py-3 hover:scale-110 hover:bg-white hover:bg-opacity-30 transition-all ease-in -rotate-90"
+              onClick={() => {
+                horoscope ? setHoroscope(false) : setHoroscope(true);
+              }}
+            >
+              Horoscope🔮
+            </button>
+            {horoscope && <Horoscope setHoroscopeState={setHoroscope} />}
             <div className="greetings mb-5">
               <Greetings /> {/* Greeting container */}
             </div>
             <div className="time_conatiner bg-black bg-opacity-50 rounded-3xl px-7 ">
-              <div
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.9 }}
                 className="pomodoro__container absolute right-[47%] bottom-5 cursor-pointer hover:bg-white hover:bg-opacity-40 flex items-center px-5 py-1 justify-center rounded-full border-2 border-white bg-black bg-opacity-40 shadow-2xl"
                 onClick={() => setpomodoroToggle(true)}
               >
                 <p className="text-white font-base mr-1">Pomodoro</p>
                 <MdOutlineTimer style={{ color: "white" }} size={20} />
-              </div>
+              </motion.div>
               {pomodoroToggle && (
                 <Pomodoro
                   pomodoroToggle={pomodoroToggle}
@@ -116,7 +129,9 @@ const App = () => {
             </div>
             <div className="personalize text-white w-[28vw] flex justify-end relative">
               {/* Button to toggle the personalization menu */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.9 }}
                 className="flex items-center border-2 border-white rounded-full px-3 py-1 bg-black bg-opacity-40 hover:bg-white hover:bg-opacity-40"
                 onClick={() => {
                   if (personalize) {
@@ -126,7 +141,7 @@ const App = () => {
               >
                 Personalize
                 <FaPaintBrush className="mx-2" />
-              </button>
+              </motion.button>
               {/* Showing the personalize menu when the toggle state is set to true */}
               {personalize && (
                 <Personalize

@@ -2,18 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .todo_container::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 .todo_container::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 
 .todo_container::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.6);
-    border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+}
+
+/* Horoscope container scrollbar */
+.horoscope::-webkit-scrollbar {
+  width: 6px;
+}
+
+.horoscope::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.horoscope::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
 }
