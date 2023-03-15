@@ -39,7 +39,7 @@ const App = () => {
         <Hello />
       ) : (
         <div
-          className="main__container h-screen px-5 py-2] bg-opacity-75 bg-cover bg-black"
+          className="main__container h-screen px-5 py-2] bg-cover"
           style={{
             backgroundImage: `url(https://source.unsplash.com/random/1366x768/?${bg_image()}), url(${fallBackImage})`,
             backgroundSize: "cover", //Image is fetched as per the user's preference
@@ -57,9 +57,19 @@ const App = () => {
                   } else setTodo(true);
                 }}
               >
-                <FiMenu /> {/* The menu icon imported from react-icon */}
+                <FiMenu
+                  style={{
+                    color: "white",
+                    backgroundColor: "black",
+                    padding: 5,
+                    height: 30,
+                    width: 30,
+                    borderRadius: 50,
+                  }}
+                />
+                {/* The menu icon imported from react-icon */}
               </button>
-              {todo && <Todos />}{" "}
+              {todo && <Todos />}
               {/* If the toggle state is true, show the todo component */}
             </div>
             <div className="right">
@@ -70,23 +80,10 @@ const App = () => {
             <div className="greetings mb-5">
               <Greetings /> {/* Greeting container */}
             </div>
-            <div className="time_conatiner bg-black bg-opacity-50 rounded-3xl px-7 ">
-              <div
-                className="pomodoro__container absolute right-[47%] bottom-5 cursor-pointer hover:bg-white hover:bg-opacity-40 flex items-center px-5 py-1 justify-center rounded-full border-2 border-white bg-black bg-opacity-40 shadow-2xl"
-                onClick={() => setpomodoroToggle(true)}
-              >
-                <p className="text-white font-base mr-1">Pomodoro</p>
-                <MdOutlineTimer style={{ color: "white" }} size={20} />
-              </div>
-              {pomodoroToggle && (
-                <Pomodoro
-                  pomodoroToggle={pomodoroToggle}
-                  setpomodoroToggle={setpomodoroToggle}
-                />
-              )}
+            <div className="time_conatiner  bg-black bg-opacity-50 backdrop-blur-lg rounded-3xl px-7 ">
               <Time /> {/* Time container */}
             </div>
-            <div className="todo_main_container bg-black py-1 pb-3 rounded-lg px-10 bg-opacity-60 mt-4 shadow-2xl">
+            <div className="todo_main_container bg-black py-1 pb-3 rounded-lg px-10 bg-opacity-60 mt-4 shadow-2xl backdrop-blur-sm">
               <div className="main_tasks text-white text-2xl mt-3">
                 What are the task for the day?
               </div>
@@ -102,7 +99,14 @@ const App = () => {
           <div className="lower_container  h-[10%] flex justify-between items-center">
             <div className="setting_div w-[28%] flex flex-col-reverse relative">
               <FiSettings
-                style={{ color: "white" }}
+                style={{
+                  color: "white",
+                  backgroundColor: "black",
+                  padding: 5,
+                  height: 30,
+                  width: 30,
+                  borderRadius: 50,
+                }}
                 onClick={() => {
                   if (settings) {
                     setSettings(false);
@@ -117,7 +121,7 @@ const App = () => {
             <div className="personalize text-white w-[28vw] flex justify-end relative">
               {/* Button to toggle the personalization menu */}
               <button
-                className="flex items-center border-2 border-white rounded-full px-3 py-1 bg-black bg-opacity-40 hover:bg-white hover:bg-opacity-40"
+                className="flex items-center border-2 border-white rounded-full px-3 py-1 bg-black bg-opacity-40 hover:bg-black hover:bg-opacity-50"
                 onClick={() => {
                   if (personalize) {
                     setPersonalize(false);
@@ -135,6 +139,19 @@ const App = () => {
                 />
               )}
             </div>
+            <div
+              className="pomodoro__container absolute right-[47%] translate-y-1 cursor-pointer hover:bg-black hover:bg-opacity-50 flex items-center px-5 py-1 justify-center rounded-full border-2 border-white bg-black bg-opacity-70 backdrop-blur-lg shadow-2xl"
+              onClick={() => setpomodoroToggle(true)}
+            >
+              <p className="text-white font-base mr-1 ">Pomodoro</p>
+              <MdOutlineTimer style={{ color: "white" }} size={20} />
+            </div>
+            {pomodoroToggle && (
+              <Pomodoro
+                pomodoroToggle={pomodoroToggle}
+                setpomodoroToggle={setpomodoroToggle}
+              />
+            )}
           </div>
         </div>
       )}
