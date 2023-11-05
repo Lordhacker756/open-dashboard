@@ -42,7 +42,7 @@ useEffect(()=>{
         setCountry('')
       };
 
-      
+      newsData();
     
     },[])
     
