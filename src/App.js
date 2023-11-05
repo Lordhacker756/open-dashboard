@@ -38,7 +38,7 @@ const App = () => {
 
   return (
     <>
-    <div className=" w-10 h-8 z-20 bg-black absolute px-2 top-[50vh]  rounded-tr-lg rounded-br-lg hover:bg-white/40  " >
+    <div className=" w-8 h-8 z-20 bg-black absolute  top-[50vh]  rounded-tr-lg rounded-br-lg hover:bg-white/40  " >
       <button onClick={()=>setNews(!news)}>
        <IconContext.Provider value={{className:'icons',size:'2rem'}}>
 

@@ -5,7 +5,7 @@ import { IconContext, } from 'react-icons'
 const News = () => {
     const [news,setNews]=useState([])
     const [country,setCountry]=useState('in')
-    const [category,setCategory]=useState('business')
+    const [category,setCategory]=useState('entertainment')
     //test data
 //     const fetchedData={
 //         article_id: "fc2ab92e722c30e49831a9f77d04477c",
@@ -25,36 +25,46 @@ const News = () => {
 // language: "portuguese",
 //     }
 
+const newsData = async () => {
+  const URL='https://newsapi.org/v2/top-headlines/sources?apiKey=609034a4817843888b3d30ce600f0273'
+  const URL1=`https://newsdata.io/api/1/news?apikey=pub_3236427375117772bbdc995b36944ef251b81&language=en&country=${country}&category=${category},`
+  const news = await fetch(
+    URL1
+  );
+  const response = await news.json();
+  setNews(response.results)
+  console.log(response.results);
+  
+  
+};
+
 useEffect(()=>{
 
-
-    const newsData = async (country,category) => {
-        const URL='https://newsapi.org/v2/top-headlines/sources?apiKey=609034a4817843888b3d30ce600f0273'
-        const URL1='https://newsdata.io/api/1/news?apikey=pub_3236427375117772bbdc995b36944ef251b81&language=en&country=in,us,jp,ca,gb&category=education,science,technology,health'
-        const news = await fetch(
-          URL1
-        );
-        const response = await news.json();
-        setNews(response.results)
-        console.log(response.results);
-
-        setCategory("")
-        setCountry('')
-      };
-
-      newsData();
+  alert("Please Enter Country Codes in 2 Letters Only, For country codes go to the link https://www.nationsonline.org/oneworld/country_code_list.htm some country codes are America->us,India-in,canada->ca,japan->jp,united kingdom->gb")
+   
+     newsData()
     
     },[])
+
+    const handleSubmit=(e)=>{
+      e.preventDefault()
+      console.log(country,category)
+      
+    newsData()
+     
+     
+
+    }
     
   return (
     <>
-    <div className='absolute z-10 mt-2 ml-2  bg-black w-[35vw] h-[90vh] bg-opacity-50 rounded-xl px-4 py-2 overflow-y-scroll todo_container shadow-2xl backdrop-blur-lg'>
-        <div>
-            <div className='main_tasks text-white text-2xl mt-3'>Customize your News</div>
-                <form>
-                    <input placeholder='Enter Country' className='focus:bg-transparent bg-transparent placeholder:text-xl text-xl mt-3 focus:outline-none placeholder:text-white border-b-[2px] w-80' onChange={(e)=>setCountry(e.target.value)} />
-                    <input placeholder='Enter Category' className="focus:bg-transparent bg-transparent placeholder:text-xl text-xl mt-3 focus:outline-none placeholder:text-white border-b-[2px] w-80 " onChange={(e)=>setCategory(e.target.value)} />
-                    <button onSubmit className=" bg-black text-white p-2 m-2 rounded-md " onChange={(e)=>setCountry(e.target.value)}>submit</button>
+    <div className='absolute z-10 mt-2 ml-2  bg-black md:w-[35vw]  h-[90vh] bg-opacity-50 rounded-xl px-4 py-2 overflow-y-scroll todo_container shadow-2xl backdrop-blur-lg'>
+        <div className='flex flex-col items-center '>
+            <div className='main_tasks text-white text-2xl mt-3 flex flex-col items-center justify-center'>Customize your News</div>
+                <form className=' flex justify-center flex-col'>
+                    <input placeholder='Enter Country' value={country} className='focus:bg-transparent text-white bg-transparent placeholder:text-lg text-xl mt-3 focus:outline-none placeholder:text-white text-center border-b-[2px] w-[90%] md:w-80' onChange={(e)=>setCountry(e.target.value)} />
+                    <input placeholder='Enter Category' value={category}className="focus:bg-transparent text-white bg-transparent placeholder:text-lg text-xl mt-3 focus:outline-none placeholder:text-white text-center border-b-[2px] w-[90%] md:w-80 " onChange={(e)=>setCategory(e.target.value)} />
+                    <button onClick={(e)=>handleSubmit(e)}  className=" bg-black  text-white p-2 mt-2 rounded-md " >submit</button>
                 </form>
             </div>
     
