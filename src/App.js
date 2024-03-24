@@ -4,17 +4,21 @@ import Quote from "./Components/Quote";
 import Time from "./Components/Time";
 import ToDoMini from "./Components/ToDoMini";
 import Weather from "./Components/Weather";
-import { FiMenu } from "react-icons/fi";
+
 import { User } from "./Contexts/UserContext";
 import Hello from "./Components/Hello";
 import Todos from "./Components/Todos";
-import { FiSettings } from "react-icons/fi";
+import { FiSettings,FiMenu } from "react-icons/fi";
 import Settings from "./Components/Settings";
 import { FaPaintBrush } from "react-icons/fa";
 import Personalize from "./Components/Personalize";
 import fallBackImage from "./data/fallback_bg.jpg";
 import { MdOutlineTimer } from "react-icons/md";
 import Pomodoro from "./Components/Pomodoro";
+import News from "./Components/News";
+import { IconContext } from "react-icons";
+import { GiNewspaper} from 'react-icons/gi'
+import { TiArrowSortedDown,TiArrowSortedUp,TiNews } from 'react-icons/ti'
 
 const App = () => {
   const { user } = useContext(User); //importing the user context which holds the values => name, verified status, theme and current location
@@ -22,6 +26,7 @@ const App = () => {
   const [settings, setSettings] = useState(false); // stores toggle state of settings box
   const [pomodoroToggle, setpomodoroToggle] = useState(false);
   const [personalize, setPersonalize] = useState(false); //stores toggle state of personalize box
+  const [news, setNews] = useState(false); //stores toggle state of personalize box
   //const [bg, setBg] = useState(fallBackImage)
 
   //Function to fetch the theme from the localstorage, if found, assign it to bg_image, else assign "nature"
@@ -33,6 +38,26 @@ const App = () => {
 
   return (
     <>
+    <div className=" w-8 h-8 z-20 bg-black absolute  top-[50vh]  rounded-tr-lg rounded-br-lg hover:bg-white/40  " >
+      <button onClick={()=>setNews(!news)}>
+       <IconContext.Provider value={{className:'icons',size:'2rem'}}>
+
+         { user && news ?<TiArrowSortedDown/>: <TiArrowSortedUp/>}
+
+       </IconContext.Provider>
+       <IconContext.Provider value={{className:'',size:'2rem',color:'white'}}>
+
+         <GiNewspaper/>
+
+       </IconContext.Provider>
+      </button>
+       
+      </div>
+      
+      
+    <div>
+    {news && <News />}
+    </div>
       {/* Check if the name, location, theme and verified exits in the localstorage aka, if the user is new or existing */}
       {/* {console.log(!user.name || !user.currLocation || !user.verified)} */}
       {!user.name || !user.currLocation || !user.verified ? (
